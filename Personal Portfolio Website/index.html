@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Abhishek Naik Portfolio</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="css/animate.css">
+    
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="css/magnific-popup.css">
+
+    <link rel="stylesheet" href="css/aos.css">
+
+    <link rel="stylesheet" href="css/ionicons.min.css">
+    
+    <link rel="stylesheet" href="css/flaticon.css">
+    <link rel="stylesheet" href="css/icomoon.css">
+		<link rel="stylesheet" href="css/style.css">
+		<!-- Immediate hero fixes: load after main CSS so these override if needed -->
+		<link rel="stylesheet" href="css/hero-fix.css">
+		<link rel="stylesheet" href="css/hero-fix-extra.css">
+
+		<!-- Inline helper styles (minimal) kept here. Larger layout rules live in `scss/style.scss` -->
+		<style>
+		/* small fixes that need to load early */
+		#typing-animation { position: relative; font-size: 30px; font-weight: bold; color: #fff; overflow: hidden; white-space: nowrap; }
+		.zoom-effect { overflow: hidden; transition: transform 0.3s ease-out; }
+		.zoom-effect:hover { transform: scale(1.1); }
+
+		/* NOTE: hero-related inline overrides were removed to allow `css/hero-fix.css` and
+		   `css/hero-fix-extra.css` to control hero layout consistently. If you need
+		   quick local tweaks, edit the CSS files instead of relying on inline rules. */
+		</style>
+
+
+  </head>
+	<!-- Fix: ensure decorative overlays and loader don't block clicks; keep navbar and buttons on top -->
+	<style>
+	/* Allow clicks through decorative overlays */
+	.overlay, .overlay::before, .overlay::after { pointer-events: none !important; }
+
+	/* The loader should intercept clicks while the page is loading (visible). */
+	/* We'll disable its pointer-events after window.load via script below. */
+	#ftco-loader { pointer-events: auto !important; z-index: 99999 !important; }
+
+	/* Bring navbar and interactive elements above backgrounds */
+	#ftco-navbar, .modern-navbar, .navbar, .brand-link { position: relative; z-index: 11000 !important; pointer-events: auto !important; }
+
+	/* Make ALL nav links clickable */
+	.modern-navbar *, .modern-nav-links, .modern-nav-links li, .modern-nav-links li a {
+		pointer-events: auto !important;
+		cursor: pointer !important;
+		z-index: 11001 !important;
+	}
+
+	/* Make buttons and links sit above overlays and be clickable */
+	a, .btn, .btn-code, .btn-primary, .btn-github, .btn-explore, .project-title a, .resume-card, button {
+		position: relative;
+		z-index: 1000 !important;
+		pointer-events: auto !important;
+		cursor: pointer !important;
+	}
+
+	/* Defensive rule: if any full-screen helper is present, don't let it block pointer events */
+	.fullscreen, .site-overlay { pointer-events: none !important; }
+
+	/* Keep focus outlines for keyboard users */
+	a:focus, button:focus { outline: 3px solid rgba(0,123,255,0.6); outline-offset: 2px; }
+
+	/* Smooth scroll behavior */
+	html { scroll-behavior: smooth; }
+
+	/* Offset scroll position to account for fixed navbar */
+	section[id] {
+		scroll-margin-top: 80px;
+	}
+
+	/* === PROJECT GRID MOBILE RESPONSIVE === */
+	@media (max-width: 767.98px) {
+		section#project-section .col-md-4 {
+			flex: 0 0 100% !important;
+			max-width: 100% !important;
+		}
+	}
+	
+	</style>
+  <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
+	  
+	  
+		<!-- Modern fixed glassmorphism navbar -->
+		<nav id="ftco-navbar" class="modern-navbar" aria-label="Main navigation">
+			<div class="container">
+				<div class="modern-nav-inner">
+					<a class="brand-link" href="index.html">
+						<div class="brand-name">Abhishek Naik</div>
+					</a>
+
+					<!-- mobile nav toggle (hidden on large screens) -->
+					<button class="modern-nav-toggle" aria-controls="modern-nav-links" aria-expanded="false" aria-label="Toggle navigation">
+						<span class="hamburger" aria-hidden="true"></span>
+					</button>
+
+					<ul id="modern-nav-links" class="modern-nav-links" role="menu">
+						<li role="none"><a role="menuitem" href="#home-section"><i class="ion-ios-home"></i><span>Home</span></a></li>
+						<li role="none"><a role="menuitem" href="#about-section"><i class="ion-person"></i><span>About</span></a></li>
+						<li role="none"><a role="menuitem" href="#skills"><i class="ion-briefcase"></i><span>Skills</span></a></li>
+						<li role="none"><a role="menuitem" href="#resume-section"><i class="ion-stats-bars"></i><span>Projects</span></a></li>
+						<li role="none"><a role="menuitem" href="#contact-section"><i class="ion-chatbubbles"></i><span>Contact</span></a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+			<section id="home-section" class="hero-section">
+				<div class="container hero-container">
+					<div class="hero-inner">
+									<div class="hero-text">
+										<span class="subheading">Hello!</span>
+										<h1 class="hero-title">I'm <span class="name">Abhishek Naik</span></h1>
+										<!-- Plain heading (visible) as requested: smaller, non-gradient heading -->
+										<p class="hero-sub">An Aspiring AI Engineer</p>
+
+		<!-- Small JS to toggle mobile menu for the new navbar -->
+		<script>
+			(function(){
+				const nav = document.querySelector('.modern-navbar');
+				const btn = document.querySelector('.modern-nav-toggle');
+				const links = document.getElementById('modern-nav-links');
+				if (!nav || !btn || !links) return;
+
+				function toggleMenu(){
+					const open = nav.classList.toggle('open');
+					btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+				}
+
+				btn.addEventListener('click', function(e){
+					e.stopPropagation();
+					toggleMenu();
+				});
+
+				// Close when clicking outside the navbar
+				document.addEventListener('click', function(e){
+					if (!nav.contains(e.target) && nav.classList.contains('open')){
+						nav.classList.remove('open');
+						btn.setAttribute('aria-expanded','false');
+					}
+				});
+
+				// Close on link click (mobile)
+				links.querySelectorAll('a').forEach(a => a.addEventListener('click', ()=>{ if (nav.classList.contains('open')){ nav.classList.remove('open'); btn.setAttribute('aria-expanded','false'); } }));
+			})();
+		</script>
+										<div class="hero-ctas">
+											<a href="#project-section" class="btn btn-explore">Explore My Work</a>
+											<a href="https://github.com/Abhishek-naik011" class="btn btn-github" target="_blank" rel="noopener noreferrer">View GitHub</a>
+										</div>
+									</div>
+
+						<div class="hero-photo-wrap">
+							<!-- Use images/profile.jpg (add the file if missing). Image is circular via CSS. -->
+							<img src="images/profile.png" alt="Abhishek Naik" class="hero-photo" onerror="this.onerror=null;this.src='images/bg_1.png'" />
+						</div>
+					</div>
+				</div>
+			</section>
+
+
+
+    <section class="ftco-about img ftco-section ftco-no-pb" id="about-section">
+    	<div class="container">
+			<div class="row">
+				<div class="row d-flex align-items-stretch">
+				<!-- <div class="row d-flex"> -->
+					<div class="col-md-6 col-lg-5 d-flex">
+						<div class="img-about img d-flex align-items-stretch">
+							<div class="overlay">
+								<div class="row">
+									<div class="col-sm-6 col-md-5">
+									  <div class="about-img">
+										
+									  </div>
+									</div>
+									<!-- Details next to profile image -->
+									<div class="col-sm-6 col-md-7">
+																		<!-- About-info removed per user request -->
+									</div>
+								  </div>
+
+								<!-- Left-overlay skills block removed to keep a single Skills section (moved after About content) -->
+							</div>
+						</div>
+					</div>
+					
+					<div class="col-md-6 col-lg-7 pl-lg-5 pb-5">
+						<div class="row justify-content-start pb-3">
+							<div class="col-md-12 heading-section ftco-animate">
+								<div class="about-text">
+									<h1 class="big">About</h1>
+									<h2 class="mb-4">About Me</h2>
+									<p>Final-year Bachelor of Engineering student specializing in Artificial Intelligence and Machine Learning. 
+									Hands-on experience from academic projects and internships using SQL, Python, Power BI and basic machine learning. Strong foundation in statistics, data cleaning and exploratory analysis — actively building projects on GitHub and seeking internship/full-time roles to apply data-driven solutions.</p>
+									<ul class="about-info mt-4 px-md-0 px-2">
+										<li class="d-flex align-items-start py-2">
+											<span class="about-label col-12 col-sm-4 text-sm-right pr-sm-4 font-weight-bold">Profile:</span>
+											<span class="about-value col-12 col-sm-8 text-sm-left">Artificial Intelligence & Machine Learning (Student)</span>
+										</li>
+										<li class="d-flex align-items-start py-2">
+											<span class="about-label col-12 col-sm-4 text-sm-right pr-sm-4 font-weight-bold">Domain:</span>
+											<span class="about-value col-12 col-sm-8 text-sm-left">Machine Learning & Predictive Analytics, NLP, Data Science & Analytics, Computer Vision</span>
+										</li>
+										<li class="d-flex align-items-start py-2">
+											<span class="about-label col-12 col-sm-4 text-sm-right pr-sm-4 font-weight-bold">Education:</span>
+											<span class="about-value col-12 col-sm-8 text-sm-left">Bachelor of Engineering (Final Year) — Expected 2026</span>
+										</li>
+										<li class="d-flex align-items-start py-2">
+											<span class="about-label col-12 col-sm-4 text-sm-right pr-sm-4 font-weight-bold">Language:</span>
+											<span class="about-value col-12 col-sm-8 text-sm-left">English, Hindi</span>
+										</li>
+										<li class="d-flex align-items-start py-2">
+											<span class="about-label col-12 col-sm-4 text-sm-right pr-sm-4 font-weight-bold">BI Tools:</span>
+											<span class="about-value col-12 col-sm-8 text-sm-left">Power BI, Looker &amp; Tableau (learning)</span>
+										</li>
+										<li class="d-flex align-items-start py-2">
+											<span class="about-label col-12 col-sm-4 text-sm-right pr-sm-4 font-weight-bold">Other Skills:</span>
+											<span class="about-value col-12 col-sm-8 text-sm-left">Python, SQL, Excel, Git, Google Analytics</span>
+										</li>
+										<li class="d-flex align-items-start py-2">
+											<span class="about-label col-12 col-sm-4 text-sm-right pr-sm-4 font-weight-bold">Interest:</span>
+											<span class="about-value col-12 col-sm-8 text-sm-left">Traveling, Travel Photography</span>
+										</li>
+									</ul>
+								</div>
+						
+						
+
+						<!-- skills section moved to top-level -->
+							</div>
+						</div>
+
+
+						<div class="counter-wrap ftco-animate d-flex mt-md-3">
+							<div class="text">
+							<p class="mb-4">
+								<span class="number" data-number="10">0</span> <span>+</span>
+								<span>&nbsp; Projects completed</span>
+							</p>
+							<p><a href="https://www.linkedin.com/in/abhishek-naik-524bb1334?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" class="btn btn-primary py-3 px-3" target="_blank" rel="noopener noreferrer">LinkedIn</a></p>
+						</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+    </section>
+    
+		<!-- Skills: unified single-column layout -->
+		<section class="ftco-section" id="skills">
+		  <div class="container">
+			<div class="row justify-content-center pb-5">
+			  <div class="col-md-7 heading-section text-center ftco-animate">
+				<h1 class="big big-2">Skills</h1>
+				<h2 class="mb-4 skills-title" style="background: linear-gradient(90deg,#7b4bff,#c15bff); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">Skills</h2>
+				<p>Key technical skills and proficiency levels.</p>
+			  </div>
+			</div>
+
+			<div class="row justify-content-center">
+			  <div class="col-md-8">
+				<div class="skill-item mb-4">
+				  <div class="skill-label">Python <span class="float-right">90%</span></div>
+				  <div class="progress">
+					<div class="progress-bar bg-primary" role="progressbar" style="width:90%;" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
+				  </div>
+				</div>
+
+				<div class="skill-item mb-4">
+				  <div class="skill-label">SQL <span class="float-right">80%</span></div>
+				  <div class="progress">
+					<div class="progress-bar bg-primary" role="progressbar" style="width:80%;" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+				  </div>
+				</div>
+
+				<div class="skill-item mb-4">
+				  <div class="skill-label">Data Visualization <span class="float-right">90%</span></div>
+				  <div class="progress">
+					<div class="progress-bar bg-primary" role="progressbar" style="width:90%;" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
+				  </div>
+				</div>
+
+				<div class="skill-item mb-4">
+				  <div class="skill-label">Statistical Analysis <span class="float-right">80%</span></div>
+				  <div class="progress">
+					<div class="progress-bar bg-primary" role="progressbar" style="width:80%;" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+				  </div>
+				</div>
+
+				<div class="skill-item mb-4">
+				  <div class="skill-label">Machine Learning <span class="float-right">85%</span></div>
+				  <div class="progress">
+					<div class="progress-bar bg-primary" role="progressbar" style="width:85%;" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
+				  </div>
+				</div>
+
+			  </div>
+			</div>
+
+		  </div>
+		</section>
+
+		<section class="ftco-section ftco-no-pb" id="resume-section">
+    	<div class="container">
+    		<div class="row justify-content-center pb-5">
+          <div class="col-md-10 heading-section text-center ftco-animate">
+          	<h1 class="big big-2">Resume</h1>
+            <h2 class="mb-4">Resume</h2>
+            <p>Final Year Engineering student specializing in AI & ML, with hands-on experience in data analysis, Python, SQL, and machine learning projects. Passionate about solving business problems using data-driven insights and building impactful academic projects.</p>
+          </div>
+        </div>
+
+			<div class="row justify-content-center pb-4">
+			  <div class="col-md-10 heading-section text-center ftco-animate">
+				<h1 class="big big-2">Education</h1>
+				<h2 class="mb-4">Education</h2>
+				<div class="underline"></div>
+			  </div>
+			</div>
+		<br>
+		
+			<div class="row">
+    			<div class="col-md-6">
+    				<div class="resume-wrap ftco-animate">
+    					<span class="date">Dec 2023-2026</span>
+    					<h2>Bachelor of Engineering - Artificial Intelligence & Machine Learning</h2>
+    					<span class="position">HKBK College of Engineering, Bengaluru</span>
+    					<p class="mt-4">Currently in 7th semester. CGPA: 7.6.</p>
+    				</div>
+    			</div>
+
+    			<div class="col-md-6">
+    				<div class="resume-wrap ftco-animate">
+    					<span class="date">Sep 2020 – June 2023</span>
+    					<h2>Diploma in Mechanical Engineering</h2>
+    					<span class="position">GPT Siddapura, Karnataka</span>
+    					<p class="mt-4">Percentage: 81%.</p>
+    				</div>
+				</div>
+    		</div>
+
+                <div class="row justify-content-center mt-5">
+                	<div class="col-md-6 text-center ftco-animate">
+                		<p><a href="https://drive.google.com/uc?export=download&id=1J_Q_YhA_1gBnPbAa4FupysoiXXka3f-O" class="btn btn-primary py-4 px-5" target="_blank" rel="noopener noreferrer">Download CV</a></p>
+                	</div>
+                </div>
+    	</div>
+    </section>
+
+   
+
+    <section class="ftco-section" id="project-section" style="width: 100%; overflow-x: hidden;">
+      <div class="container" style="max-width: 1140px; margin: 0 auto; padding: 0 15px;">
+        <div class="row justify-content-center mb-5 pb-5">
+          <div class="col-md-7 heading-section text-center ftco-animate">
+            <h1 class="big big-2">Projects</h1>
+            <h2 class="mb-4">Projects</h2>
+            <p>Below are a few of my featured AI and ML projects on Python, ML and AI.</p>
+          </div>
+        </div>
+				<div class="row d-flex" style="display: -webkit-box !important; display: -ms-flexbox !important; display: flex !important; -ms-flex-wrap: wrap !important; flex-wrap: wrap !important; margin-left: -15px !important; margin-right: -15px !important;">
+					<div class="col-md-4 d-flex ftco-animate" style="-webkit-box-flex: 0 !important; -ms-flex: 0 0 33.333333% !important; flex: 0 0 33.333333% !important; max-width: 33.333333% !important; padding-left: 15px !important; padding-right: 15px !important; margin-bottom: 30px !important; display: -webkit-box !important; display: -ms-flexbox !important; display: flex !important;">
+						<div class="project-card project-card--feature" style="width: 100% !important; display: -webkit-box !important; display: -ms-flexbox !important; display: flex !important; -webkit-box-orient: vertical !important; -webkit-box-direction: normal !important; -ms-flex-direction: column !important; flex-direction: column !important;">
+							<!-- Composite thumbnail: left & right small thumbs beside main image -->
+							<div class="project-thumb-grid" aria-hidden="true">
+								<img src="images/proj_1_left.jpg" alt="" class="project-thumb-img small left">
+								<img src="images/proj_1_main.jpg" alt="" class="project-thumb-img main">
+								<img src="images/proj_1_right.jpg" alt="" class="project-thumb-img small right">
+							</div>
+							<div class="project-body">
+								<div class="project-badges">
+									<span class="badge-ribbon">Featured</span>
+									<span class="badge-small">AI</span>
+								</div>
+								<h3 class="project-title"><a href="https://github.com/Abhishek-naik011/salary-prediction" target="_blank" rel="noopener noreferrer">Salary Prediction (Streamlit)</a></h3>
+								<p class="project-desc">Machine learning model that predicts employee salaries. Streamlit frontend for live inputs and visualization.</p>
+
+								<div class="project-tags">
+									<span class="tag">Python</span>
+									<span class="tag">Scikit-learn</span>
+									<span class="tag">Streamlit</span>
+									<span class="tag">Data Visualization</span>
+								</div>
+
+								<div class="project-cta">
+									<a class="btn-code" href="https://github.com/Abhishek-naik011/salary-prediction" target="_blank" rel="noopener noreferrer">Code</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4 d-flex ftco-animate" style="-webkit-box-flex: 0 !important; -ms-flex: 0 0 33.333333% !important; flex: 0 0 33.333333% !important; max-width: 33.333333% !important; padding-left: 15px !important; padding-right: 15px !important; margin-bottom: 30px !important; display: -webkit-box !important; display: -ms-flexbox !important; display: flex !important;">
+						<div class="project-card" style="width: 100% !important; display: -webkit-box !important; display: -ms-flexbox !important; display: flex !important; -webkit-box-orient: vertical !important; -webkit-box-direction: normal !important; -ms-flex-direction: column !important; flex-direction: column !important;">
+							<div class="project-thumb" style="background-image:url('images/proj_2.jpg')" aria-hidden="true"></div>
+							<div class="project-body">
+								<div class="project-badges">
+									<span class="badge-ribbon">Featured</span>
+									<span class="badge-small">Data</span>
+								</div>
+								<h3 class="project-title"><a href="https://github.com/Abhishek-naik011/stroke-prediction" target="_blank" rel="noopener noreferrer">Stroke Prediction (AI)</a></h3>
+								<p class="project-desc">Developed a machine learning model to predict the likelihood of a stroke based on health metrics. Includes a Streamlit app for realtime predictions and visualizations.</p>
+								<div class="project-tags">
+									<span class="tag">Python</span>
+									<span class="tag">Scikit-learn</span>
+									<span class="tag">Streamlit</span>
+									<span class="tag">Healthcare</span>
+								</div>
+								<div class="project-cta"><a class="btn-code" href="https://github.com/Abhishek-naik011/stroke-prediction" target="_blank" rel="noopener noreferrer">Code</a></div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4 d-flex ftco-animate" style="-webkit-box-flex: 0 !important; -ms-flex: 0 0 33.333333% !important; flex: 0 0 33.333333% !important; max-width: 33.333333% !important; padding-left: 15px !important; padding-right: 15px !important; margin-bottom: 30px !important; display: -webkit-box !important; display: -ms-flexbox !important; display: flex !important;">
+						<div class="project-card" style="width: 100% !important; display: -webkit-box !important; display: -ms-flexbox !important; display: flex !important; -webkit-box-orient: vertical !important; -webkit-box-direction: normal !important; -ms-flex-direction: column !important; flex-direction: column !important;">
+							<div class="project-thumb" style="background-image:url('images/proj_3.jpg')" aria-hidden="true"></div>
+							<div class="project-body">
+								<div class="project-badges">
+									<span class="badge-ribbon">Featured</span>
+									<span class="badge-small">NLP</span>
+								</div>
+								<h3 class="project-title"><a href="https://github.com/Abhishek-naik011/sentiment_analysis" target="_blank" rel="noopener noreferrer">Sentiment Analysis</a></h3>
+								<p class="project-desc">Machine learning model to analyze customer sentiment from reviews. Includes preprocessing, model pipeline and a Streamlit demo for visualization.</p>
+								<div class="project-tags">
+									<span class="tag">Python</span>
+									<span class="tag">NLP</span>
+									<span class="tag">Streamlit</span>
+									<span class="tag">Text Analytics</span>
+								</div>
+								<div class="project-cta"><a class="btn-code" href="https://github.com/Abhishek-naik011/sentiment_analysis" target="_blank" rel="noopener noreferrer">Code</a></div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Second Row of Projects -->
+				<div class="row d-flex justify-content-center" style="display: -webkit-box !important; display: -ms-flexbox !important; display: flex !important; -ms-flex-wrap: wrap !important; flex-wrap: wrap !important; margin-left: -15px !important; margin-right: -15px !important; -webkit-box-pack: center !important; -ms-flex-pack: center !important; justify-content: center !important;">
+					<div class="col-md-4 d-flex ftco-animate" style="-webkit-box-flex: 0 !important; -ms-flex: 0 0 33.333333% !important; flex: 0 0 33.333333% !important; max-width: 33.333333% !important; padding-left: 15px !important; padding-right: 15px !important; margin-bottom: 30px !important; display: -webkit-box !important; display: -ms-flexbox !important; display: flex !important;">
+						<div class="project-card" style="width: 100% !important; display: -webkit-box !important; display: -ms-flexbox !important; display: flex !important; -webkit-box-orient: vertical !important; -webkit-box-direction: normal !important; -ms-flex-direction: column !important; flex-direction: column !important;">
+							<div class="project-thumb" style="background-image:url('images/proj_4.jpg')" aria-hidden="true"></div>
+							<div class="project-body">
+								<div class="project-badges">
+									<span class="badge-ribbon">Featured</span>
+									<span class="badge-small">Web App</span>
+								</div>
+								<h3 class="project-title"><a href="https://github.com/Abhishek-naik011/NLP-project" target="_blank" rel="noopener noreferrer">Roastify Me — Mood Web App</a></h3>
+								<p class="project-desc">Interactive mood-based web app offering Roast or Compliment modes, a mood meter and mirror mode — fun frontend with NLP hooks.</p>
+								<div class="project-tags">
+									<span class="tag">Python</span>
+									<span class="tag">NLP</span>
+									<span class="tag">Web App</span>
+								</div>
+								<div class="project-cta"><a class="btn-code" href="https://github.com/Abhishek-naik011/NLP-project" target="_blank" rel="noopener noreferrer">Code</a></div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4 d-flex ftco-animate" style="-webkit-box-flex: 0 !important; -ms-flex: 0 0 33.333333% !important; flex: 0 0 33.333333% !important; max-width: 33.333333% !important; padding-left: 15px !important; padding-right: 15px !important; margin-bottom: 30px !important; display: -webkit-box !important; display: -ms-flexbox !important; display: flex !important;">
+						<div class="project-card" style="width: 100% !important; display: -webkit-box !important; display: -ms-flexbox !important; display: flex !important; -webkit-box-orient: vertical !important; -webkit-box-direction: normal !important; -ms-flex-direction: column !important; flex-direction: column !important;">
+							<div class="project-thumb" style="background-image:url('images/proj_5.jpg')" aria-hidden="true"></div>
+							<div class="project-body">
+								<div class="project-badges">
+									<span class="badge-ribbon">Featured</span>
+									<span class="badge-small">CV</span>
+								</div>
+								<h3 class="project-title"><a href="https://github.com/Abhishek-naik011/SCT_ML_3" target="_blank" rel="noopener noreferrer">Image Classification (Cats vs Dogs)</a></h3>
+								<p class="project-desc">Built an SVM-based image classifier for cats vs dogs using feature engineering and classical ML pipelines; includes evaluation and deployment notes.</p>
+								<div class="project-tags">
+									<span class="tag">Python</span>
+									<span class="tag">SVM</span>
+									<span class="tag">Computer Vision</span>
+									<span class="tag">Image Processing</span>
+								</div>
+								<div class="project-cta"><a class="btn-code" href="https://github.com/Abhishek-naik011/SCT_ML_3" target="_blank" rel="noopener noreferrer">Code</a></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+	  </div>
+    </section>
+
+	<section class="ftco-section ftco-no-pt ftco-no-pb ftco-counter img" id="section-counter">
+      <div class="container">
+		<div class="row d-md-flex align-items-center">
+          <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
+            <div class="block-18">
+              <div class="text">
+                <strong class="number" data-number="15">0</strong>
+                <span>Certifications Earned</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
+            <div class="block-18">
+              <div class="text">
+                <strong class="number" data-number="10">0</strong>
+                <span>Projects</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
+            <div class="block-18">
+              <div class="text">
+                <strong class="number" data-number="1500">0</strong>
+                <span>Learning Hours</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+	
+	  <div class="ftco-section ftco-hireme img margin-top" style="background-image: url(images/bg_1.jpg)">
+			<!-- <div class="container"> -->
+				<div class="row justify-content-center">
+					<div class="col-md-7 ftco-animate text-center">
+						<h2>More projects on<span> Github  </span> </h2>
+						<div class="heading"> <h4> Engineering intelligence -- one model at a time </h4>
+						<br>
+						<p><a href="https://github.com/Abhishek-naik011" class="btn btn-primary py-3 px-5" target="_blank" rel="noopener noreferrer">GitHub</a></p>
+						</div>
+					</div>
+				</div>
+			<!-- </div> -->
+		</div>
+	</section>
+
+
+
+    <section class="ftco-section contact-section ftco-no-pb" id="contact-section">
+      <div class="container">
+      	<div class="row justify-content-center mb-5 pb-3">
+          <div class="col-md-7 heading-section text-center ftco-animate">
+            <h1 class="big big-2">Contact</h1>
+            <h2 class="mb-4">Contact Me</h2>
+            <p>Below are the details to reach out to me!</p>
+          </div>
+        </div>
+
+        <div class="row d-flex contact-info mb-5">
+          <div class="col-md-6 col-lg-3 d-flex ftco-animate">
+          	<div class="align-self-stretch box p-4 text-center">
+          		<div class="icon d-flex align-items-center justify-content-center">
+          			<span class="icon-map-signs"></span>
+          		</div>
+          		<h3 class="mb-4">Address</h3>
+	            <p>Bengaluru, India</p>
+	          </div>
+          </div>
+          <div class="col-md-6 col-lg-3 d-flex ftco-animate">
+          	<div class="align-self-stretch box p-4 text-center">
+          		<div class="icon d-flex align-items-center justify-content-center">
+          			<span class="icon-phone2"></span>
+          		</div>
+          		<h3 class="mb-4">Contact Number</h3>
+	            <p><a href="tel://6362797659">+ 91 6362797659</a></p>
+	          </div>
+          </div>
+          <div class="col-md-6 col-lg-3 d-flex ftco-animate">
+          	<div class="align-self-stretch box p-4 text-center">
+          		<div class="icon d-flex align-items-center justify-content-center">
+          			<span class="icon-paper-plane"></span>
+          		</div>
+          		<h3 class="mb-4">Email Address</h3>
+	            <p><a href="mailto:abhisheknaik01@gmail.com">abhisheknaik01@gmail.com</a></p>
+	          </div>
+          </div>
+										<!-- resume card: placed between contact info and the "Have a Question?" block -->
+
+								<!-- Resume card placed under the Contact Number column on large screens. -->
+								<div class="row mb-4 align-items-center resume-row">
+									<!-- empty column to align under the first (Address) column on lg -->
+									<div class="d-none d-lg-block col-lg-3"></div>
+
+									<!-- center column: aligns under Contact Number column on lg, centered on md/sm -->
+												<div class="col-12 col-md-6 offset-md-6 col-lg-3 d-flex justify-content-center">
+										<div class="text-center ftco-animate">
+											<a class="resume-card" href="https://drive.google.com/file/d/1J_Q_YhA_1gBnPbAa4FupysoiXXka3f-O/view?usp=drive_link" download="Abhishek_Resume.pdf" role="button" aria-labelledby="resume-card-title" target="_blank" rel="noopener noreferrer">
+												<h3 id="resume-card-title" class="resume-card-title">Download My Resume</h3>
+												<p class="resume-card-desc">Get a detailed overview of my experience, skills, and achievements.</p>
+												<span class="btn-resume" aria-hidden="true">
+													<span class="btn-resume-icon" aria-hidden="true">
+														<!-- Clean download SVG icon -->
+														<svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+															<path d="M12 3v10" stroke="#062014" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+															<path d="M8 9l4 4 4-4" stroke="#062014" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+															<path d="M21 21H3" stroke="#062014" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+														</svg>
+													</span>
+													<span class="btn-resume-text">Download Resume</span>
+												</span>
+											</a>
+										</div>
+									</div>
+
+									<!-- remaining space to the right (keeps visual balance) -->
+									<div class="d-none d-lg-block col-lg-6"></div>
+								</div>
+
+					<div class="container">
+			<br>
+			<br>
+			<div class="row justify-content-center">
+				<div class="col-md-7 ftco-animate text-center">
+					<h2>Have a<span> Question?  </span> <a href="https://forms.gle/TRrvKSBn7gb7SfMk9" class="btn btn-primary py-3 px-5" target="_blank" rel="noopener noreferrer">Click Here</a> </h2>
+				</div>
+			</div>
+				<br>
+				<ul class="ftco-footer-social list-unstyled d-flex justify-content-center align-items-center mb-0">
+				  <li class="ftco-animate normal-txt">Find me on  </li>
+				  <li class="ftco-animate"><a href="https://github.com/Abhishek-naik011" target="_blank" rel="noopener noreferrer"><span class="icon-github"></span></a></li>
+				  <li class="ftco-animate"><a href="https://www.linkedin.com/in/abhishek-naik-524bb1334?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" rel="noopener noreferrer"><span class="icon-linkedin"></span></a></li>  
+				</ul>
+			<br>
+		   </div>
+   </div>
+ </section>
+
+
+ 
+	
+<footer style="text-align:center; padding:20px 0; color:#fff; background:transparent;">
+  <h2 style="
+    font-weight:600;
+    font-size:28px;
+    background: linear-gradient(90deg, #00c6ff, #0072ff, #ff6ec4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  ">
+    "Turning Code into Creativity"
+  </h2>
+  <p style="font-size:14px; color:#aaa; margin-top:10px;">
+    © <script>document.write(new Date().getFullYear());</script> Abhishek Naik. Built with curiosity and code.
+  </p>
+</footer>
+
+
+
+  <!-- loader -->
+  <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+
+
+  <script src="js/jquery.min.js"></script>
+  <script src="js/jquery-migrate-3.0.1.min.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/jquery.easing.1.3.js"></script>
+  <script src="js/jquery.waypoints.min.js"></script>
+  <script src="js/jquery.stellar.min.js"></script>
+  <script src="js/owl.carousel.min.js"></script>
+  <script src="js/jquery.magnific-popup.min.js"></script>
+  <script src="js/aos.js"></script>
+  <script src="js/jquery.animateNumber.min.js"></script>
+  <script src="js/scrollax.min.js"></script>
+  
+  <script src="js/main.js"></script>
+	<script>
+		// Keep loader blocking while the page loads, then immediately disable overlays and loader
+		// once all resources are finished loading (window.load). This ensures the loader still
+		// visually blocks during load but won't prevent clicks after load completes.
+		window.addEventListener('load', function(){
+			// Wait a short moment (300ms) to allow any late JS-run adjustments,
+			// then disable overlays/loader so links become clickable.
+			setTimeout(function(){
+				try{
+					// Known overlay elements and the loader: disable pointer events now that load finished
+					document.querySelectorAll('.overlay, .fullscreen, .site-overlay, #ftco-loader').forEach(function(el){
+						if(el && el.style) el.style.pointerEvents = 'none';
+					});
+
+					// Defensive scan: any absolutely/fixed positioned element with very high z-index
+					// that covers the page can block clicks — clear pointer-events unless it's nav.
+					document.querySelectorAll('body *').forEach(function(el){
+						try{
+							var cs = window.getComputedStyle(el);
+							if((cs.position === 'fixed' || cs.position === 'absolute') && cs.display !== 'none'){
+								var z = parseInt(cs.zIndex,10);
+								if(!isNaN(z) && z > 999){
+									// preserve navbar and intentional interactive elements
+									if(!el.closest('#ftco-navbar') && !el.closest('.modern-navbar') && !el.classList.contains('resume-card') && !el.classList.contains('btn') && !el.tagName.match(/^(A|BUTTON)$/i)){
+										el.style.pointerEvents = 'none';
+									} else {
+										// Ensure navbar and buttons are clickable
+										el.style.pointerEvents = 'auto';
+										el.style.cursor = 'pointer';
+									}
+								}
+							}
+						}catch(e){}
+					});
+
+					// Make sure navbar remains above everything and clickable
+					var nav = document.getElementById('ftco-navbar') || document.querySelector('.modern-navbar');
+					if(nav && nav.style) {
+						nav.style.zIndex = '11000';
+						nav.style.pointerEvents = 'auto';
+					}
+
+					// Ensure all nav links are clickable
+					document.querySelectorAll('.modern-nav-links a, .modern-navbar a').forEach(function(link){
+						link.style.pointerEvents = 'auto';
+						link.style.cursor = 'pointer';
+					});
+
+					// Ensure all buttons are clickable
+					document.querySelectorAll('a, button, .btn, .btn-code, .btn-primary, .btn-github, .btn-explore').forEach(function(btn){
+						btn.style.pointerEvents = 'auto';
+						btn.style.cursor = 'pointer';
+					});
+
+					console.log('All interactive elements enabled successfully');
+				}catch(e){ console && console.warn && console.warn('overlay-fix', e); }
+			}, 300);
+		});
+
+		// Additional check: if document is already loaded, run immediately
+		if(document.readyState === 'complete'){
+			window.dispatchEvent(new Event('load'));
+		}
+	</script>
+  
+	<!-- IntersectionObserver to trigger resume-card animation when visible -->
+	<script>
+		(function(){
+			const card = document.querySelector('.resume-card');
+			if (!card || !('IntersectionObserver' in window)){
+				// fallback: reveal immediately
+				if(card) card.classList.add('animate-in');
+				return;
+			}
+
+			const obs = new IntersectionObserver((entries, o) => {
+				entries.forEach(e => {
+					if (e.isIntersecting) {
+						e.target.classList.add('animate-in');
+						o.unobserve(e.target);
+					}
+				});
+			}, { threshold: 0.2 });
+
+			obs.observe(card);
+		})();
+	</script>
+  
+		<!-- Active nav link script: highlights nav links based on scroll (IntersectionObserver) -->
+		<script>
+			(function(){
+				const nav = document.querySelector('.modern-navbar');
+				const toggleBtn = document.querySelector('.modern-nav-toggle');
+				const navLinks = Array.from(document.querySelectorAll('.modern-nav-links a'));
+				const sectionIds = navLinks.map(a => a.getAttribute('href')).filter(h => h && h.startsWith('#'));
+				const sections = sectionIds.map(id => document.querySelector(id)).filter(Boolean);
+
+				function clearActive(){ navLinks.forEach(a => a.classList.remove('active')); }
+				function setActive(link){ clearActive(); if(link) link.classList.add('active'); }
+
+				// Scroll to target with offset (account for fixed navbar)
+				function scrollToSection(target){
+					if (!target) return;
+					const navHeight = document.querySelector('.modern-navbar')?.getBoundingClientRect().height || 80;
+					const rect = target.getBoundingClientRect();
+					const offset = window.pageYOffset + rect.top - navHeight - 12; // small gap
+					window.scrollTo({ top: offset, behavior: 'smooth' });
+				}
+
+				// Click handlers for links
+				navLinks.forEach(a => {
+					a.addEventListener('click', function(e){
+						const href = this.getAttribute('href');
+						if (href && href.startsWith('#')){
+							e.preventDefault();
+							const target = document.querySelector(href);
+							scrollToSection(target);
+							setActive(this);
+							// close mobile menu if open
+							if (nav.classList.contains('open')){ nav.classList.remove('open'); toggleBtn?.setAttribute('aria-expanded','false'); }
+						}
+					});
+				});
+
+				// IntersectionObserver: choose the most visible section and activate its link
+				if ('IntersectionObserver' in window && sections.length){
+					const observer = new IntersectionObserver((entries) => {
+						// find the entry with the largest intersectionRatio that's intersecting
+						const visible = entries.filter(e => e.isIntersecting);
+						if (visible.length){
+							visible.sort((a,b) => b.intersectionRatio - a.intersectionRatio);
+							const topEntry = visible[0];
+							const id = '#' + topEntry.target.id;
+							const link = navLinks.find(a => a.getAttribute('href') === id);
+							if (link) setActive(link);
+						}
+					}, { root: null, rootMargin: '0px 0px -40% 0px', threshold: [0, 0.25, 0.5, 0.75, 1] });
+
+					sections.forEach(s => observer.observe(s));
+
+					// set active on load based on initial viewport (or hash)
+					window.addEventListener('load', function(){
+						if (location.hash){
+							const link = navLinks.find(a => a.getAttribute('href') === location.hash);
+							if (link) setActive(link);
+						} else {
+							// find any section currently visible
+							sections.forEach(s => {
+								const rect = s.getBoundingClientRect();
+								if (rect.top <= window.innerHeight * 0.5 && rect.bottom >= window.innerHeight * 0.25){
+									const link = navLinks.find(a => a.getAttribute('href') === '#'+s.id);
+									if (link) setActive(link);
+								}
+							});
+						}
+					});
+				} else {
+					// fallback: on scroll, compute nearest section by distance to viewport center
+					function onScroll(){
+						let best = null; let bestDist = Infinity;
+						const viewportCenter = window.innerHeight / 2;
+						sections.forEach(s => {
+							const rect = s.getBoundingClientRect();
+							const dist = Math.abs((rect.top + rect.bottom)/2 - viewportCenter);
+							if (dist < bestDist){ bestDist = dist; best = s; }
+						});
+						if (best){ const link = navLinks.find(a => a.getAttribute('href') === '#'+best.id); if (link) setActive(link); }
+					}
+					window.addEventListener('scroll', onScroll, { passive: true });
+					window.addEventListener('load', onScroll);
+				}
+
+				// Expose for debugging
+				window.__setActiveNavLink = setActive;
+			})();
+		</script>
+    
+  </body>
+</html>

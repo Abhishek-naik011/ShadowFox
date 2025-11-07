@@ -1,0 +1,605 @@
+/* Additional targeted overrides to place the circular hero image on the right at large widths
+   and to remove vertical gaps when the window is half-screen. Loaded after hero-fix.css. */
+
+/* Large / fullscreen: keep text on left and photo on right, no overlap */
+@media (min-width: 1300px) {
+  /* Use flex layout: text (left) + fixed-width photo (right). The text area
+     reserves space so the photo can't overlap it. The photo size is responsive
+     using clamp(). */
+  .home-slider .slider-item {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 2rem !important;
+    padding-right: 1rem !important;
+  }
+
+  /* Reserve enough width for the photo on the right. Use calc fallback to
+     ensure text never flows under the image. */
+  .home-slider .slider-item .slider-text {
+    order: 1 !important;
+    flex: 1 1 auto !important;
+    max-width: calc(100% - 380px) !important; /* reserve space for 320px image + gap */
+    padding-right: 2rem !important;
+    padding-left: 2rem !important;
+    box-sizing: border-box !important;
+    min-width: 300px !important;
+  }
+
+  /* Photo container: responsive fixed column on the right */
+  .home-slider .slider-item .one-third.img {
+    order: 2 !important;
+    flex: 0 0 clamp(280px, 22vw, 380px) !important;
+    width: clamp(280px, 22vw, 380px) !important;
+    max-width: 380px !important;
+    margin-left: auto !important; /* push to right */
+    margin-right: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    position: relative !important;
+  }
+
+  /* Keep the circular photo sized to the container and prevent transforms */
+  .home-slider .slider-item .one-third.img .hero-photo {
+    width: 100% !important;
+    height: auto !important;
+    max-width: 380px !important;
+    max-height: 380px !important;
+    object-fit: cover !important;
+    transform: none !important;
+    box-shadow: 0 18px 60px rgba(0,0,0,0.65) !important;
+  }
+
+  /* Remove extra top/bottom space that could push the hero down */
+  #home-section { padding-top: 0 !important; padding-bottom: 0 !important; }
+  .home-slider { min-height: 0 !important; height: auto !important; }
+}
+
+/* Strong final enforcement for large screens: make the .slider-text row a proper flex container
+   with left-aligned content and a fixed-width image column on the right. This matches the
+   reference layout where text sits left and the circular photo sits to the right without overlap. */
+@media (min-width: 1300px) {
+  #home-section .home-slider > .slider-item .slider-text {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    gap: 2rem !important;
+    padding-left: 4vw !important; /* give the text some left gutter */
+    padding-right: 0 !important;
+  }
+
+  #home-section .home-slider > .slider-item .slider-text .one-forth {
+    flex: 1 1 auto !important;
+    max-width: calc(60% - 2rem) !important; /* keep text to left ~60% */
+    min-width: 320px !important;
+    text-align: left !important;
+  }
+
+  /* Ensure the image column stays a fixed width on the right and does not become absolute */
+  #home-section .home-slider > .slider-item .slider-text .one-third.img {
+    order: 2 !important;
+    flex: 0 0 360px !important;
+    width: 360px !important;
+    margin-left: auto !important;
+    margin-right: 6vw !important;
+    position: relative !important;
+  }
+
+  #home-section .home-slider > .slider-item .slider-text .one-third.img .hero-photo {
+    width: 100% !important;
+    height: auto !important;
+    display: block !important;
+  }
+}
+
+/* Medium / half-screen sizes: collapse extra min-heights and vertically center photo */
+@media (min-width: 768px) and (max-width: 1199.98px) {
+  .home-slider .slider-item {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 1rem !important;
+  }
+
+  /* Let the layout stack if needed but ensure the photo keeps no large top/bottom gap */
+  .home-slider .slider-item .one-third.img {
+    order: 2 !important;
+    width: 36vw !important;
+    max-width: 360px !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  .home-slider .slider-item .one-third.img .hero-photo {
+    width: 36vw !important;
+    max-width: 360px !important;
+    height: auto !important;
+    margin: 0 !important;
+    transform: none !important;
+  }
+
+  /* Collapse any leftover min-heights from carousel scripts */
+  .home-slider, .home-slider .owl-stage, .home-slider .owl-stage-outer, .home-slider .owl-item {
+    min-height: 0 !important;
+    height: auto !important;
+  }
+
+  /* Reduce vertical padding around hero so there isn't a black band above/below */
+  #home-section { padding-top: 0 !important; padding-bottom: 0 !important; }
+}
+
+/* Small screens: keep existing smaller sizes but remove unnecessary gaps */
+@media (max-width: 767.98px) {
+  .home-slider { min-height: 60px !important; height: auto !important; }
+  .home-slider .slider-item .one-third.img { width: 220px !important; height: auto !important; margin: 8px auto !important; }
+  .home-slider .slider-item .one-third.img .hero-photo { width: 220px !important; height: 220px !important; }
+  #home-section, #about-section { padding-top: 0 !important; padding-bottom: 0 !important; }
+}
+
+/* Safety: if JS adds inline heights/transform, clear them on load via inline script we can add later if needed */
+/* This file only contains CSS. If gaps persist due to JS inline styles, I can add a short DOM script that clears inline heights after DOMContentLoaded. */
+
+/* === New: Clean two-column hero layout that matches reference visual ===
+   - Applies only on very large desktops (>=1300px)
+   - Left column: text + buttons (fluid)
+   - Right column: circular profile image, responsive via clamp()
+   - Below 1300px the layout stacks with the image below the text and centered
+*/
+
+/* gradient background similar to the reference */
+#home-section.hero {
+  background: radial-gradient(ellipse at right, rgba(103,58,183,0.35) 0%, rgba(32,37,77,0.45) 35%, rgba(8,10,20,1) 100%), linear-gradient(180deg,#0b0b12 0%, #070709 100%);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/* Global hero-inner base: always center contents vertically when used */
+.hero-inner {
+  display: block; /* will become flex at large widths */
+  width: 100%;
+}
+
+/* large desktops: explicit two-column flex layout */
+@media (min-width: 1300px) {
+  /* stronger, highly-specific selector to override other theme rules if necessary */
+  #home-section.hero .home-slider .slider-item .hero-inner {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important; /* vertical centering */
+    justify-content: flex-start !important;
+    gap: 2.5rem !important;
+    width: 100% !important;
+  }
+
+  /* left column (text) takes remaining space but never flows under the image */
+  #home-section.hero .home-slider .slider-item .hero-inner .one-forth {
+    order: 1 !important;
+    flex: 1 1 auto !important;
+    max-width: calc(100% - 36rem) !important; /* generous reserve to avoid overlap */
+    padding-left: 4vw !important;
+    padding-right: 1.5rem !important;
+    box-sizing: border-box !important;
+  }
+
+  /* right column: fixed responsive image column placed at the right of the hero */
+  #home-section.hero .home-slider .slider-item .hero-inner .one-third.img {
+    order: 2 !important;
+    flex: 0 0 auto !important;
+    width: clamp(220px, 25vw, 320px) !important; /* requested responsive sizing */
+    max-width: 32rem !important;
+    margin-left: auto !important; /* push to right */
+    margin-right: 0 !important;
+    padding: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    position: relative !important;
+  }
+
+  #home-section.hero .home-slider .slider-item .hero-inner .one-third.img .hero-photo {
+    width: 100% !important;
+    height: auto !important;
+    border-radius: 50% !important;
+    object-fit: cover !important;
+    box-shadow: 0 24px 90px rgba(0,0,0,0.55) !important;
+    border: 6px solid rgba(255,255,255,0.06) !important; /* subtle ring */
+    display: block !important;
+    transform: none !important;
+    margin: 0 !important;
+    max-height: calc(100vh - 160px) !important; /* avoid very tall images exceeding viewport */
+  }
+
+  /* If the theme still forces layout, use an absolute-placement fallback so the image
+     visually sits at the right edge and vertically centers. This also reserves text
+     space using a CSS variable computed from the responsive image width. */
+  #home-section.hero .home-slider .slider-item .hero-inner {
+    --hero-photo-w: clamp(220px, 25vw, 320px) !important;
+    position: relative !important;
+  }
+
+  #home-section.hero .home-slider .slider-item .hero-inner .one-third.img {
+    /* absolute anchor to the right edge */
+    position: absolute !important;
+    right: 4vw !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    width: var(--hero-photo-w) !important;
+    max-width: 360px !important;
+    margin: 0 !important;
+    z-index: 55 !important;
+  }
+
+  /* Reserve text area so it cannot run under the absolutely positioned image */
+  #home-section.hero .home-slider .slider-item .hero-inner .one-forth {
+    padding-right: calc(var(--hero-photo-w) + 6vw) !important;
+  }
+
+  /* ensure slider/parents don't clip or add gaps */
+  #home-section, .home-slider, .home-slider .slider-item { padding-top: 0 !important; padding-bottom: 0 !important; min-height: 0 !important; height: auto !important; }
+}
+
+/* Below 1300px: stack with image below the text and center it horizontally */
+@media (max-width: 1299.98px) {
+  /* stack vertically with text first, image below */
+  #home-section.hero .home-slider .slider-item .hero-inner { display: flex !important; flex-direction: column !important; align-items: center !important; gap: 1rem !important; }
+  #home-section.hero .home-slider .slider-item .hero-inner .one-forth { order: 1 !important; max-width: 900px !important; padding-left: 2rem !important; padding-right: 2rem !important; text-align: left !important; }
+  #home-section.hero .home-slider .slider-item .hero-inner .one-third.img { order: 2 !important; width: clamp(180px, 40vw, 280px) !important; max-width: 320px !important; margin: 0 auto !important; }
+  #home-section.hero .home-slider .slider-item .hero-inner .one-third.img .hero-photo { width: 100% !important; height: auto !important; border-radius: 50% !important; }
+}
+
+/* ============= User-requested two-column hero layout (explicit, simple) ============= */
+/* Targets the page's .hero-container used in `index.html`.
+   - Desktop (>=992px): two-column flex row, text left, photo right, vertically centered.
+   - Mobile (<992px): stacked column with photo below text.
+*/
+
+#home-section .hero-container {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  gap: 2rem !important;
+}
+
+#home-section .hero-container .hero-inner { /* inner wrapper should also be full width */
+  width: 100%;
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 2rem !important;
+}
+
+/* Text column: grow and take available space */
+.hero-text {
+  flex: 1 1 auto !important;
+  min-width: 0 !important; /* allow text truncation/wrap instead of overflow */
+}
+
+/* Photo column: equal flex so it sits to the right; center the image inside */
+.hero-photo-wrap,
+.hero-photo {
+  flex: 1 1 auto !important;
+}
+.hero-photo-wrap {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+/* Make sure the circular photo doesn't grow too large and remains responsive */
+.hero-photo {
+  max-width: 380px !important;
+  width: 40vw !important;
+  height: auto !important;
+  border-radius: 50% !important;
+  object-fit: cover !important;
+  box-shadow: 0 18px 60px rgba(0,0,0,0.6) !important;
+}
+
+/* Responsive: below 992px stack vertically and put photo below the text */
+@media (max-width: 991.98px) {
+  #home-section .hero-container,
+  #home-section .hero-container .hero-inner {
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 1rem !important;
+  }
+  .hero-text { order: 1 !important; text-align: center !important; }
+  .hero-photo-wrap { order: 2 !important; margin-top: 1rem !important; }
+  .hero-photo { width: 72vw !important; max-width: 260px !important; }
+}
+
+/* Small tweak: ensure hero section doesn't collapse or add extra top/bottom spacing */
+#home-section { overflow: visible !important; }
+
+/* End of user-requested simple/fallback hero layout */
+
+/* Styling for visible navbar title and hero-name added per user request */
+.navbar-title {
+  color: #fff !important;
+  font-weight: 700 !important;
+  font-size: 16px !important;
+  letter-spacing: 0.2px !important;
+  display: inline-block !important;
+}
+
+.hero-name {
+  font-size: 20px !important;
+  font-weight: 600 !important;
+  color: rgba(255,255,255,0.92) !important;
+  margin: 6px 0 0 0 !important;
+  line-height: 1 !important;
+  text-transform: none !important;
+}
+
+@media (max-width: 991.98px) {
+  .navbar-title { font-size: 15px !important; }
+  .hero-name { font-size: 18px !important; }
+}
+
+/* ========== Modern fixed glass navbar styling ========== */
+.modern-navbar {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  transform: none !important;
+  z-index: 11000 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  border-radius: 0 !important;
+  padding: 12px 24px !important;
+  background: rgba(12,10,20,0.85) !important; /* darker for better contrast when pinned */
+  box-shadow: 0 2px 20px rgba(0,0,0,0.5) !important;
+  backdrop-filter: blur(12px) saturate(120%) !important;
+  -webkit-backdrop-filter: blur(12px) saturate(120%) !important;
+  border-bottom: 1px solid rgba(255,255,255,0.08) !important;
+  pointer-events: auto !important;
+}
+
+.modern-navbar .modern-nav-inner { display:flex !important; align-items:center !important; justify-content:space-between !important; gap: 12px !important; max-width: 1200px !important; margin: 0 auto !important; }
+
+.modern-navbar .brand-link { display:flex !important; flex-direction:column !important; text-decoration:none !important; pointer-events: auto !important; cursor: pointer !important; }
+.modern-navbar .brand-name {
+  font-weight:800 !important;
+  font-size:18px !important;
+  line-height:1 !important;
+  /* gradient text */
+  /* Gradient text that matches hero tones */
+  background: linear-gradient(90deg, #63b3ff, #7b4bff 40%, #ff6ec4 100%) !important;
+  background-clip: text !important;
+  -webkit-background-clip: text !important;
+  color: transparent !important;
+}
+.modern-navbar .brand-sub { font-size:11px !important; color: rgba(255,255,255,0.75) !important; margin-top:2px !important; }
+
+.modern-nav-links { list-style:none !important; display:flex !important; gap: 18px !important; margin:0 !important; padding:0 !important; align-items:center !important; pointer-events: auto !important; }
+.modern-nav-links li a { display:flex !important; gap:8px !important; align-items:center !important; padding:8px 12px !important; border-radius:10px !important; color: rgba(255,255,255,0.92) !important; text-decoration:none !important; font-weight:600 !important; pointer-events: auto !important; cursor: pointer !important; transition: all 0.3s ease !important; }
+.modern-nav-links li a i { font-size:20px !important; color: rgba(255,255,255,0.95) !important; }
+.modern-nav-links li a:hover { background: linear-gradient(90deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02)) !important; box-shadow: 0 6px 18px rgba(0,0,0,0.45) !important; }
+.modern-nav-links li a.active {
+  /* active gradient background + subtle glow to match site theme */
+  background: linear-gradient(90deg, rgba(99,179,255,0.12), rgba(123,75,255,0.14), rgba(255,110,196,0.12)) !important;
+  box-shadow: 0 8px 30px rgba(124,77,255,0.12), 0 2px 6px rgba(0,0,0,0.35) !important;
+  color: #ffffff !important;
+}
+
+/* stronger accent for the icon inside active link */
+.modern-nav-links li a.active i {
+  filter: drop-shadow(0 6px 18px rgba(124,77,255,0.18));
+  color: #fff !important;
+}
+
+/* Pulse / glow animation for active nav links */
+@keyframes navGlowPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(124,77,255,0.12);
+    transform: translateY(0);
+  }
+  50% {
+    box-shadow: 0 18px 48px 8px rgba(124,77,255,0.12);
+    transform: translateY(-3px);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(124,77,255,0);
+    transform: translateY(0);
+  }
+}
+
+@keyframes iconPulse {
+  0% { filter: drop-shadow(0 0 0 rgba(124,77,255,0)); }
+  50% { filter: drop-shadow(0 12px 30px rgba(124,77,255,0.18)); }
+  100% { filter: drop-shadow(0 0 0 rgba(124,77,255,0)); }
+}
+
+/* Apply animation when active. Use reduced motion respect if user prefers no animations. */
+@media (prefers-reduced-motion: no-preference) {
+  .modern-nav-links li a.active {
+    animation: navGlowPulse 1.8s ease-in-out infinite;
+  }
+  .modern-nav-links li a.active i {
+    animation: iconPulse 1.8s ease-in-out infinite;
+  }
+}
+
+/* Slightly increase visual priority while maintaining legibility */
+.modern-nav-links li a.active { z-index: 70 !important; }
+.modern-nav-links li a span { display:inline-block !important; }
+
+/* Make navbar slightly smaller on small screens and wrap links */
+@media (max-width: 767.98px) {
+  .modern-navbar { top: 0 !important; left: 0 !important; right: 0 !important; width: 100% !important; padding: 12px 16px !important; transform: none !important; border-radius: 0 !important; }
+  .modern-navbar .brand-name { font-size:16px !important; }
+  .modern-nav-links { gap: 10px !important; flex-wrap:wrap !important; justify-content:center !important; display:none !important; }
+  .modern-nav-links li a { padding:6px 8px !important; font-size:14px !important; }
+}
+
+/* show toggle button on small screens */
+.modern-nav-toggle { display: none !important; background: transparent !important; border: none !important; cursor: pointer !important; pointer-events: auto !important; z-index: 11002 !important; }
+.modern-nav-toggle .hamburger { display: inline-block; width: 26px; height: 2px; background: #fff; position: relative; }
+.modern-nav-toggle .hamburger::before, .modern-nav-toggle .hamburger::after { content: ''; position: absolute; left: 0; width: 100%; height: 2px; background: #fff; }
+.modern-nav-toggle .hamburger::before { top: -8px; }
+.modern-nav-toggle .hamburger::after { top: 8px; }
+
+@media (max-width: 767.98px) {
+  .modern-nav-toggle { display: inline-flex !important; align-items:center !important; justify-content:center !important; margin-left: 12px !important; }
+  /* When open, show dropdown menu below the navbar */
+  .modern-navbar.open .modern-nav-links { display:flex !important; flex-direction:column !important; gap:8px !important; position:absolute !important; top: calc(100% + 0px) !important; left: 0 !important; right: 0 !important; transform: none !important; background: rgba(10,8,18,0.95) !important; padding: 16px !important; border-radius: 0 !important; box-shadow: 0 4px 20px rgba(2,2,6,0.8) !important; border-top: 1px solid rgba(255,255,255,0.08) !important; width: 100% !important; }
+  .modern-navbar.open { z-index: 11000 !important; }
+  .modern-navbar.open .modern-nav-links li { width: 100% !important; }
+  .modern-navbar.open .modern-nav-links li a { width: 100% !important; justify-content: center !important; }
+}
+
+/* Slightly darken/bias navbar background to match hero purple tones */
+.modern-navbar {
+  background: linear-gradient(180deg, rgba(20,12,35,0.56) 0%, rgba(10,6,18,0.5) 100%) !important;
+  border: 1px solid rgba(140,76,255,0.08) !important; /* faint purple border */
+  box-shadow: 0 10px 40px rgba(18,10,40,0.6) !important;
+}
+
+/* Skills section title: match other main section headings (size, weight, centering, gradient/text-shadow) */
+.skills-title {
+  display: block !important;
+  text-align: center !important;
+  font-size: 50px !important; /* match .heading-section h2 */
+  font-weight: 700 !important;
+  margin-top: 0.5rem !important;
+  margin-bottom: 1.5rem !important; /* preserves .mb-4 spacing */
+  line-height: 1.1 !important;
+  /* gradient text matching site palette */
+  background: linear-gradient(90deg, #63b3ff 0%, #7b4bff 45%, #ff6ec4 100%) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  color: transparent !important;
+  /* subtle glow to enhance legibility on dark backgrounds */
+  text-shadow: 0 6px 28px rgba(123,75,255,0.08) !important;
+}
+
+@media (max-width: 767.98px) {
+  .skills-title { font-size: 38px !important; }
+}
+
+/* small accessibility focus state */
+.modern-nav-links li a:focus { outline: 2px solid rgba(0,198,255,0.25) !important; outline-offset:2px !important; }
+
+/* ensure page content does not hide under fixed navbar: add top padding to body equal to navbar height on large screens */
+@media (min-width: 768px) {
+  body { padding-top: 70px !important; }
+}
+
+@media (max-width: 767.98px) {
+  body { padding-top: 60px !important; }
+}
+
+/* Make sure all interactive elements have proper pointer-events and z-index */
+a, button, .btn, .btn-code, .btn-primary, .btn-github, .btn-explore, .btn-resume, .project-card, .resume-card {
+  pointer-events: auto !important;
+  cursor: pointer !important;
+  position: relative !important;
+  z-index: 100 !important;
+}
+
+/* Navbar and its children should be above everything */
+.modern-navbar, .modern-navbar *, #ftco-navbar, #ftco-navbar * {
+  pointer-events: auto !important;
+  z-index: 11000 !important;
+}
+
+/* Overlays should not block clicks */
+.overlay, .overlay::before, .overlay::after, .fullscreen, .site-overlay {
+  pointer-events: none !important;
+}
+
+/* Hero section adjustments for fixed navbar */
+#home-section.hero-section {
+  margin-top: 0 !important;
+  padding-top: 80px !important;
+}
+
+/* ===== CRITICAL FIX: PROJECT GRID 3x2 LAYOUT ===== */
+/* Override any conflicting styles to ensure proper 3-column grid */
+/* Force reset all project section styles */
+section#project-section {
+  width: 100% !important;
+  overflow-x: hidden !important;
+}
+
+section#project-section .container {
+  max-width: 1140px !important;
+  margin: 0 auto !important;
+  padding-right: 15px !important;
+  padding-left: 15px !important;
+  width: 100% !important;
+}
+
+section#project-section .row {
+  display: -webkit-box !important;
+  display: -ms-flexbox !important;
+  display: flex !important;
+  -ms-flex-wrap: wrap !important;
+  flex-wrap: wrap !important;
+  margin-right: -15px !important;
+  margin-left: -15px !important;
+  width: auto !important;
+}
+
+section#project-section .row .col-md-4 {
+  position: relative !important;
+  width: 100% !important;
+  padding-right: 15px !important;
+  padding-left: 15px !important;
+  margin-bottom: 30px !important;
+  min-height: 1px !important;
+}
+
+/* Desktop and tablet: 3 columns - FORCE IT */
+@media (min-width: 768px) {
+  section#project-section .row .col-md-4 { 
+    -webkit-box-flex: 0 !important;
+    -ms-flex: 0 0 33.333333% !important;
+    flex: 0 0 33.333333% !important; 
+    max-width: 33.333333% !important;
+  }
+}
+
+/* Mobile: 1 column */
+@media (max-width: 767.98px) {
+  section#project-section .row .col-md-4 { 
+    -webkit-box-flex: 0 !important;
+    -ms-flex: 0 0 100% !important;
+    flex: 0 0 100% !important; 
+    max-width: 100% !important;
+  }
+}
+
+/* Ensure cards stretch to fill their containers */
+section#project-section .row .col-md-4.d-flex {
+  display: -webkit-box !important;
+  display: -ms-flexbox !important;
+  display: flex !important;
+}
+
+section#project-section .row .col-md-4.d-flex > .project-card {
+  width: 100% !important;
+  display: -webkit-box !important;
+  display: -ms-flexbox !important;
+  display: flex !important;
+  -webkit-box-orient: vertical !important;
+  -webkit-box-direction: normal !important;
+  -ms-flex-direction: column !important;
+  flex-direction: column !important;
+}
+
+/* Ensure project body stretches */
+section#project-section .project-card .project-body {
+  -webkit-box-flex: 1 !important;
+  -ms-flex: 1 1 auto !important;
+  flex: 1 1 auto !important;
+}
+
+

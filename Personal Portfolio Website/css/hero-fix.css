@@ -1,0 +1,719 @@
+/* Hero fixes loaded after main stylesheet so they can safely override layout
+	 and ensure the circular profile image remains fully visible on resize. */
+
+/* Allow visible overflow for the slider so the circle isn't clipped */
+.home-slider,
+.home-slider .slider-item,
+.slider-text {
+	overflow: visible !important;
+}
+
+/* === New: Robust flexbox layout for hero to keep image on the right and prevent overlap ===
+   Goals:
+   - Large screens: text left, circular photo right, no overlap
+   - Medium/small screens: photo stacks above/below and is vertically centered with no extra gap
+   - Use max-widths and calc() so text cannot flow beneath the image
+*/
+.home-slider .slider-item {
+	display: flex !important;
+	flex-direction: row !important;
+	align-items: center !important;
+	justify-content: space-between !important;
+	gap: 2rem !important;
+}
+
+.home-slider .slider-item .slider-text,
+.home-slider .slider-item .one-forth {
+	flex: 1 1 auto !important;
+	min-width: 0 !important; /* allow truncation/line-breaks instead of overflow */
+}
+
+/* Reserve space for the image so the text can't run underneath it */
+.home-slider .slider-item .slider-text {
+	max-width: calc(100% - 380px) !important; /* leave room for the image + gap */
+}
+
+/* Stronger layout guard: add right padding equal to image area so text never flows under it.
+	This uses a padding-based approach which is more robust when other width rules exist. */
+.home-slider .slider-item .slider-text {
+	 padding-right: 420px !important; /* image (360) + gap (60) — tweak if you change image size */
+	 box-sizing: border-box !important;
+}
+
+/* Ensure the slider is a positioned container so absolute/floating children cannot escape
+	and to make z-index ordering reliable across browsers */
+.home-slider .slider-item { position: relative !important; }
+
+/* Put text above the image visually so when space is tight the text remains readable.
+	The image remains clickable/visible but cannot cover the text. */
+.home-slider .slider-item .slider-text { z-index: 60 !important; position: relative !important; }
+.home-slider .slider-item .one-third.img { z-index: 50 !important; position: relative !important; }
+
+.home-slider .slider-item .one-third.img {
+	flex: 0 0 360px !important;
+	max-width: 360px !important;
+	display: flex !important;
+	justify-content: center !important;
+	align-items: center !important;
+	margin: 0 0 0 auto !important; /* push it to the right */
+	padding: 0 !important;
+	overflow: visible !important;
+}
+
+.hero-photo {
+	width: 100% !important;
+	height: auto !important;
+	max-width: 360px !important;
+	border-radius: 50% !important;
+	display: block !important;
+}
+
+/* Stack & center for smaller screens: no extra top/bottom gaps and vertical centering */
+@media (max-width: 991.98px) {
+	.home-slider .slider-item {
+		flex-direction: column !important;
+		align-items: center !important;
+		justify-content: center !important;
+		gap: 0.75rem !important;
+	}
+	.home-slider .slider-item .slider-text,
+	.home-slider .slider-item .one-forth {
+		max-width: 100% !important;
+		text-align: center !important;
+		padding: 0 1rem !important;
+	}
+	.home-slider .slider-item .one-third.img {
+		order: 0 !important;
+		width: auto !important;
+		max-width: 72vw !important;
+		margin: 0 auto 6px auto !important;
+		flex: 0 0 auto !important;
+	}
+	.hero-photo { max-width: 220px !important; width: 72vw !important; height: auto !important; }
+	/* Remove extra hero vertical spacing on small screens and remove the right padding guard */
+	#home-section { padding-top: 0 !important; padding-bottom: 0 !important; }
+	.home-slider .slider-item .slider-text { padding-right: 0 !important; max-width: 100% !important; }
+}
+
+
+/* Final aggressive collapse of any remaining vertical spacing in the hero/slider
+   This forces heights to auto, clears padding/margins, and neutralizes transforms
+   that can be applied by scroll/animation scripts so the circular photo sits tight. */
+.home-slider, .home-slider .slider-item, .home-slider .slider-item .container, .home-slider .slider-item .row, .slider-text {
+	min-height: 0 !important;
+	height: auto !important;
+	padding-top: 0 !important;
+	padding-bottom: 0 !important;
+	margin: 0 !important;
+}
+.slider-text, .slider-text [data-scrollax], .slider-text [data-scrollax] * {
+	transform: none !important;
+}
+.one-third.img {
+	margin-top: 0 !important;
+	margin-bottom: 0 !important;
+	padding: 0 !important;
+}
+.hero-photo {
+	margin-top: 0 !important;
+	margin-bottom: 0 !important;
+}
+/* In case the carousel/slider adds inline heights on a parent, try to collapse them */
+.home-slider .owl-stage, .home-slider .owl-stage-outer, .home-slider .owl-item { height: auto !important; min-height: 0 !important; }
+
+/* Strong, focused overrides for the circular hero photo */
+.hero-photo {
+	position: relative !important;
+	z-index: 50 !important; /* keep below navbar (navbar uses very high z-index) */
+	display: block !important;
+	/* remove extra default margins so the photo fits tightly with surrounding content */
+	margin: 0 auto !important;
+	border-radius: 50% !important;
+	object-fit: cover !important;
+	max-width: 420px !important; /* cap on very large screens */
+	width: 40vw !important; /* responsive sizing based on viewport width */
+	height: auto !important; /* scale height with width */
+	box-shadow: 0 18px 60px rgba(0,0,0,0.65) !important;
+	border: 8px solid rgba(255,255,255,0.03) !important;
+	transform: translateY(0) !important;
+}
+
+/* Remove extra vertical padding around the hero image wrapper so the circle sits tight */
+.one-third.img {
+	padding: 0 !important;
+	margin: 0 auto !important;
+	display: flex !important;
+	justify-content: center !important;
+	align-items: center !important;
+	overflow: visible !important;
+}
+
+/* Make sure the hero section has enough top/bottom spacing so the
+	 circular photo doesn't get overlapped by following sections */
+#home-section {
+	overflow: visible !important;
+	/* remove default top/bottom padding so hero and about sit tightly */
+	padding-top: 0 !important;
+	padding-bottom: 0 !important;
+}
+
+@media (min-width: 1200px) {
+	.hero-photo { width: 380px !important; max-width: 380px !important; }
+	/* aggressively remove extra space */
+	#home-section { padding-top: 0 !important; padding-bottom: 0 !important; }
+	.home-slider { min-height: 120px !important; height: auto !important; }
+	.one-third.img { margin-bottom: 0 !important; padding: 0 !important; }
+	.ftco-about { margin-top: -110px !important; position: relative !important; z-index: 6 !important; }
+}
+
+@media (min-width: 768px) and (max-width: 1199.98px) {
+	.hero-photo { width: 36vw !important; max-width: 380px !important; }
+	/* remove extra vertical spacing */
+	#home-section { padding-top: 0 !important; padding-bottom: 0 !important; }
+	.home-slider { min-height: 80px !important; height: auto !important; }
+	.one-third.img { margin-bottom: 0 !important; padding: 0 !important; }
+	.ftco-about { margin-top: -80px !important; position: relative !important; z-index: 6 !important; }
+}
+
+@media (max-width: 767.98px) {
+	.hero-photo { width: 220px !important; height: 220px !important; margin-top: 8px !important; }
+	/* remove vertical gaps on small screens entirely */
+	#home-section { padding-top: 0 !important; padding-bottom: 0 !important; }
+	#about-section { padding-top: 0 !important; padding-bottom: 0 !important; }
+	.home-slider { min-height: 60px !important; height: auto !important; }
+	.one-third.img { margin-bottom: 0 !important; padding: 0 !important; }
+	.ftco-about { margin-top: -48px !important; position: relative !important; z-index: 6 !important; }
+}
+
+/* Final override: prefer a pure flex layout on the inner row to match the reference
+   (keeps text left, image at right) and explicitly cancel any absolute positioning
+   that pushed the image off-screen. These rules are highly specific and come last. */
+@media (min-width: 992px) {
+	/* target the exact row that contains the text + image */
+	#home-section .home-slider .slider-item .container > .row.d-md-flex {
+		display: flex !important;
+		flex-direction: row !important;
+		align-items: center !important;
+		justify-content: flex-start !important;
+		gap: 2rem !important;
+	}
+
+	/* ensure the text block grows and respects max width (leaves room for image) */
+	#home-section .home-slider .slider-item .container > .row.d-md-flex .one-forth {
+		flex: 1 1 auto !important;
+		min-width: 0 !important;
+		max-width: calc(100% - 420px) !important; /* reserve room for image + gap */
+		box-sizing: border-box !important;
+		padding-right: 1rem !important;
+		position: relative !important;
+		z-index: 60 !important;
+	}
+
+	/* cancel absolute positioning and push image to the right using margin-left:auto */
+	#home-section .home-slider .slider-item .container > .row.d-md-flex .one-third.img {
+		position: static !important;
+		right: auto !important;
+		top: auto !important;
+		transform: none !important;
+		order: 2 !important;
+		flex: 0 0 360px !important;
+		width: 360px !important;
+		max-width: 360px !important;
+		margin-left: auto !important;
+		margin-right: 0 !important;
+		display: flex !important;
+		justify-content: center !important;
+		align-items: center !important;
+		z-index: 40 !important;
+	}
+
+	/* image itself fills the column */
+	#home-section .home-slider .slider-item .container > .row.d-md-flex .one-third.img .hero-photo {
+		width: 100% !important;
+		height: auto !important;
+		border-radius: 50% !important;
+		display: block !important;
+	}
+}
+
+
+/* Visual placement for the Skills block to match the screenshot: 
+	 - On large screens keep the Skills visually in a left column while the About text remains on the right
+	 - On medium/small screens revert to normal flow so it stacks under About
+*/
+@media (min-width: 992px) {
+	.ftco-about { position: relative; }
+
+	/* Absolutely position the Skills box on the left side of the about area */
+	.ftco-about .skills-section {
+		position: absolute !important;
+		top: 120px; /* tweak if you'd like more vertical alignment */
+		left: 40px;
+		width: 260px;
+		z-index: 10;
+	}
+
+	/* Create visual space on the right column so About text doesn't sit beneath the positioned Skills box */
+	.ftco-about .col-md-6.col-lg-7 {
+		padding-left: 340px; /* equals left + width + gap; tweak as necessary */
+	}
+
+	.ftco-about .skills-section h3 { color: rgba(255,255,255,0.9); font-weight:600; margin-bottom: 12px; }
+	.ftco-about .skills-section span { display:block; color: #d1d1d1; margin-bottom:6px; font-weight:600; }
+	.ftco-about .skills-section .progress { height: 10px; margin-bottom: 14px; }
+}
+
+/* Centering for medium/half-screen widths (e.g. window snapped to half on 1920px -> ~960px)
+   Hide left image column and center the about text so the content sits in the middle
+   of the viewport similar to the reference image. */
+@media (min-width: 768px) and (max-width: 1199.98px) {
+	.ftco-about .row.d-flex.align-items-stretch {
+		max-width: 900px !important;
+		margin-left: auto !important;
+		margin-right: auto !important;
+		display: flex !important;
+		justify-content: center !important;
+		align-items: stretch !important;
+	}
+
+	/* hide the left image column at these widths so the text column centers */
+	.ftco-about .col-md-6.col-lg-5 {
+		display: none !important;
+		flex: 0 0 0 !important;
+		max-width: 0 !important;
+	}
+
+	.ftco-about .col-md-6.col-lg-7 {
+		flex: 0 0 80% !important;
+		max-width: 80% !important;
+		margin-left: auto !important;
+		margin-right: auto !important;
+		text-align: center !important;
+	}
+
+	.ftco-about .skills-section { width: 100% !important; margin-top: 24px !important; }
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+	/* keep skills in normal flow for medium screens */
+	.ftco-about .skills-section { position: static !important; width: 100%; margin-bottom: 18px; }
+	.ftco-about .col-md-6.col-lg-7 { padding-left: 0; }
+}
+
+@media (max-width: 767.98px) {
+	.ftco-about .skills-section { position: static !important; width: 100%; margin-bottom: 18px; }
+	.ftco-about .col-md-6.col-lg-7 { padding-left: 0; }
+}
+
+/* Force the Skills section to remain below the About content on large/full-screen layouts
+	 This overrides the earlier left-column visual placement so Skills will not overlap the About text. */
+@media (min-width: 992px) {
+	.ftco-about .skills-section {
+		position: static !important;
+		width: 100% !important;
+		margin: 18px 0 0 0 !important;
+		left: auto !important;
+		top: auto !important;
+	}
+	.ftco-about .col-md-6.col-lg-7 {
+		padding-left: 0 !important;
+	}
+}
+
+/* Center the about block (image + content) on large screens so it doesn't sit far right
+	 Leaves a balanced left/right gutter and prevents a large empty left column. */
+@media (min-width: 992px) {
+	.ftco-about .row.d-flex.align-items-stretch {
+		max-width: 1000px !important;
+		margin-left: auto !important;
+		margin-right: auto !important;
+		padding-left: 0 !important;
+		padding-right: 0 !important;
+		/* ensure the inner row becomes a centered flex container */
+		display: flex !important;
+		justify-content: center !important;
+		align-items: stretch !important;
+	}
+
+	/* Make columns respect their proportional widths inside the centered container
+	   and ensure the left (image) column centers its content */
+	.ftco-about .col-md-6.col-lg-5 {
+		flex: 0 0 40% !important;
+		max-width: 40% !important;
+		display: flex !important;
+		justify-content: center !important;
+		align-items: center !important;
+	}
+
+	.ftco-about .col-md-6.col-lg-7 {
+		flex: 0 0 60% !important;
+		max-width: 60% !important;
+		display: flex !important;
+		flex-direction: column !important;
+		justify-content: center !important;
+	}
+
+	/* Slight spacing for skills under the about content */
+	.ftco-about .skills-section { margin-top: 24px !important; width: 100% !important; }
+
+	/* Additionally center the About text block itself (heading + paragraph)
+	   so the section appears in the middle of the page like the reference image. */
+	.ftco-about .col-md-6.col-lg-7 {
+		max-width: 800px !important;
+		margin-left: auto !important;
+		margin-right: auto !important;
+		text-align: center !important; /* center heading and main paragraph */
+		flex: 0 0 auto !important;
+	}
+
+	/* Center the main descriptive paragraph but keep the smaller info rows left-aligned
+	   (we re-align common info rows back to left so Profile/Domain lines remain readable). */
+	.ftco-about .col-md-6.col-lg-7 > p { text-align: center !important; margin: 0 auto 1.5rem !important; max-width: 760px !important; }
+	.ftco-about .col-md-6.col-lg-7 .row > .col-6 { text-align: left !important; }
+	.ftco-about .heading-section { text-align: center !important; }
+
+	/* Watermark: place the oversized "big" decorative text directly behind the
+	   About heading only. The heading content stays above while the large
+	   decorative word sits behind and is responsive. */
+	#about-section .heading-section { position: relative; }
+	#about-section .heading-section .big {
+		position: absolute;
+		left: 50%;
+		transform: translateX(-50%);
+		top: -18px; /* adjust vertical offset so watermark sits behind the heading */
+		font-size: 160px !important;
+		line-height: 1 !important;
+		margin: 0 !important;
+		color: rgba(255,255,255,0.04) !important; /* faint/low-contrast watermark */
+		z-index: 0 !important;
+		pointer-events: none !important;
+		user-select: none !important;
+	}
+	/* keep the visible heading content on top */
+	#about-section .heading-section h2,
+	#about-section .heading-section h1,
+	#about-section .heading-section .mb-4 {
+		position: relative;
+		z-index: 2;
+	}
+
+	/* smaller screens: reduce watermark size so it doesn't overpower layout */
+	@media (max-width: 1199.98px) {
+		#about-section .heading-section .big { font-size: 110px !important; top: -12px; }
+	}
+	@media (max-width: 767.98px) {
+		#about-section .heading-section .big { font-size: 72px !important; top: -8px; }
+		#about-section .heading-section { overflow: visible; }
+	}
+}
+
+/* Responsive layout: place photo on the right for large screens, above content on small screens.
+   Also remove remaining vertical gaps on small viewports so the image fits tightly. */
+@media (min-width: 992px) {
+	.ftco-about .row.d-flex.align-items-stretch {
+		display: flex !important;
+		flex-direction: row !important;
+		align-items: center !important;
+		justify-content: space-between !important;
+		gap: 32px !important;
+		max-width: 1100px !important;
+		margin-left: auto !important;
+		margin-right: auto !important;
+	}
+
+	/* On large screens put the image column on the right */
+	.ftco-about .col-md-6.col-lg-5 { order: 2 !important; flex: 0 0 40% !important; max-width: 40% !important; display:flex !important; justify-content:center !important; align-items:center !important; }
+	.ftco-about .col-md-6.col-lg-7 { order: 1 !important; flex: 0 0 58% !important; max-width: 58% !important; }
+
+	/* Remove vertical padding/margins so the photo sits tight at right */
+	.ftco-about .one-third.img { padding: 0 !important; margin: 0 !important; }
+	.hero-photo { margin: 0 !important; }
+}
+
+/* === NEW: Absolute-right hero image behavior (like reference) ===
+   On large screens place the circular image fixed to the right side of the hero area,
+   vertically centered. Reserve space on the text column so content never flows under it.
+   On smaller viewports we keep the stacked centered behavior.
+*/
+@media (min-width: 992px) {
+	/* define a single variable for image width so adjustments are easy */
+	:root { --hero-img-w: 320px; }
+
+	/* Ensure slider-item is a positioned container for absolute children */
+	.home-slider .slider-item { position: relative !important; display: block !important; }
+
+	/* Absolutely position the image on the right and center vertically */
+	.home-slider .slider-item .one-third.img {
+		position: absolute !important;
+		right: 6vw !important; /* keep some breathing room from the viewport edge */
+		top: 50% !important;
+		transform: translateY(-50%) !important;
+		width: var(--hero-img-w) !important;
+		max-width: var(--hero-img-w) !important;
+		flex: 0 0 auto !important;
+		margin: 0 !important;
+		display: block !important; /* remove flex centering which can interfere */
+		z-index: 10 !important;
+	}
+
+	/* Make the hero photo fully fill its container while remaining circular */
+	.home-slider .slider-item .one-third.img .hero-photo {
+		width: 100% !important;
+		height: auto !important;
+		max-width: none !important;
+		border-radius: 50% !important;
+		box-shadow: 0 18px 60px rgba(0,0,0,0.65) !important;
+	}
+
+	/* Reserve right-side room for the image so text never goes beneath it */
+	.home-slider .slider-item .slider-text {
+		margin-right: calc(var(--hero-img-w) + 6vw) !important; /* image width + gap */
+		max-width: none !important;
+		box-sizing: border-box !important;
+		z-index: 20 !important; /* keep text visually above if any overlap occurs */
+	}
+
+	/* Slightly shrink heading sizes if you want less overlap potential at very large widths */
+	.home-slider .slider-item .slider-text h1 { line-height: 1 !important; }
+}
+
+@media (max-width: 991.98px) {
+	/* revert padding/margins so stacked layout fills the width and image centers */
+	.home-slider .slider-item .slider-text { margin-right: 0 !important; padding-right: 0 !important; }
+	.home-slider .slider-item .one-third.img { position: relative !important; right: auto !important; top: auto !important; transform: none !important; margin: 0 auto 8px auto !important; }
+	.home-slider .slider-item .one-third.img .hero-photo { max-width: 72vw !important; width: 72vw !important; height: auto !important; }
+}
+
+@media (max-width: 991.98px) {
+	/* stack the content on mobile/tablet: photo above text and tight spacing */
+	.ftco-about .row.d-flex.align-items-stretch { display:flex !important; flex-direction:column !important; align-items:center !important; gap: 12px !important; }
+
+	/* ensure photo appears first (above text) */
+	.ftco-about .one-third.img { order: 0 !important; width: 100% !important; display:flex !important; justify-content:center !important; align-items:center !important; padding: 0 !important; margin: 0 auto 8px auto !important; }
+	.ftco-about .col-md-6.col-lg-7 { order: 1 !important; width: 100% !important; max-width: 820px !important; text-align: center !important; }
+
+	/* Remove leftover tall hero height and large bottom paddings on small screens */
+	.home-slider { min-height: 140px !important; }
+	#home-section { padding-top: 8px !important; padding-bottom: 12px !important; }
+	#about-section { padding-top: 8px !important; padding-bottom: 12px !important; }
+	.one-third.img { margin-bottom: 6px !important; }
+}
+
+/* small tweak for extremely narrow phones to avoid overflow */
+@media (max-width: 420px) {
+	.ftco-about .col-md-6.col-lg-7 { padding-left: 12px !important; padding-right: 12px !important; }
+	.hero-photo { width: 180px !important; height: 180px !important; }
+}
+
+/* Tighten About section vertical spacing to remove leftover empty gap */
+#about-section {
+	padding-top: 1.5rem !important;
+	padding-bottom: 1.5rem !important;
+}
+
+.ftco-about { margin-top: 6px !important; }
+
+/* Center the Projects counter + LinkedIn button inside the hire-me area
+   so the "10+ Projects completed" and the button appear in the middle. */
+.ftco-hireme {
+	/* make section full-height and center its contents both vertically and horizontally */
+	display: flex !important;
+	align-items: center !important;
+	justify-content: center !important;
+	text-align: center !important;
+	/* lowered min-height so the section doesn't introduce large empty space */
+	min-height: 55vh !important;
+	padding-top: 32px !important;
+	padding-bottom: 32px !important;
+	position: relative !important;
+}
+.ftco-hireme .row { width: 100% !important; display:flex !important; justify-content:center !important; align-items:center !important; height:100% !important; }
+.ftco-hireme .col-md-7,
+.ftco-hireme .col-md-6 { margin-left: auto !important; margin-right: auto !important; text-align: center !important; width:100% !important; max-width:920px !important; }
+.ftco-hireme .col-md-7 { display:flex !important; flex-direction:column !important; align-items:center !important; justify-content:center !important; }
+
+/* fallback absolute centering for stubborn layouts: ensure the column sits centered */
+@media (min-width: 768px) {
+	.ftco-hireme { display:flex !important; align-items:center !important; justify-content:center !important; }
+	.ftco-hireme .row { position: relative !important; }
+	.ftco-hireme .row > .col-md-7 { position: relative !important; left: 0 !important; transform: none !important; }
+}
+
+/* Force inner pieces (counter, description, button) to center themselves */
+.ftco-hireme .block-18,
+.ftco-hireme .counter-wrap,
+.ftco-hireme p,
+.ftco-hireme .btn,
+.ftco-hireme .btn-primary {
+	margin-left: auto !important;
+	margin-right: auto !important;
+	display: inline-block !important;
+	text-align: center !important;
+}
+.ftco-hireme .btn { margin: 16px auto !important; display: inline-block !important; }
+
+@media (max-width: 991.98px) {
+	.ftco-hireme { min-height: 300px !important; padding-top: 28px !important; padding-bottom: 28px !important; }
+}
+
+@media (max-width: 767.98px) {
+	.ftco-hireme { padding: 24px 12px !important; min-height: auto !important; }
+}
+
+/* Center the small counter block ("10+ Projects completed + LinkedIn") inside the
+   About/Skills column so it appears centered in the page. This targets the
+   counter-wrap used in the About section. */
+.ftco-about .counter-wrap {
+	display: flex !important;
+	justify-content: center !important;
+	align-items: center !important;
+	width: 100% !important;
+	margin-top: 32px !important;
+}
+.ftco-about .counter-wrap .text { text-align: center !important; }
+
+@media (min-width: 768px) and (max-width: 1199.98px) {
+	/* ensure counter block centers when the layout collapses or is snapped */
+	.ftco-about .col-md-6.col-lg-7 { display: flex !important; flex-direction: column !important; align-items: center !important; }
+	.ftco-about .counter-wrap { margin-top: 28px !important; }
+}
+
+/* Absolute center placement for hire-me: strong override to ensure the
+   counter + button sit visually in the middle of the section above Resume.
+   This targets the direct column inside the row and centers it in the
+   section regardless of container widths. Reverts to normal flow on small screens. */
+@media (min-width: 768px) {
+	.ftco-hireme { position: relative !important; }
+	.ftco-hireme > .row > .col-md-7 {
+		position: absolute !important;
+		left: 50% !important;
+		top: 50% !important;
+		transform: translate(-50%, -50%) !important;
+		width: auto !important;
+		max-width: 920px !important;
+		text-align: center !important;
+		display: block !important;
+		padding: 0 20px !important;
+	}
+	.ftco-hireme .col-md-7 .block-18,
+	.ftco-hireme .col-md-7 .counter-wrap,
+	.ftco-hireme .col-md-7 .btn {
+		display: block !important;
+		margin: 0 auto 18px auto !important;
+	}
+}
+
+@media (max-width: 767.98px) {
+	.ftco-hireme > .row > .col-md-7 { position: static !important; transform: none !important; top: auto !important; left: auto !important; }
+}
+
+/* Center Education heading and underline inside #resume-section */
+#resume-section .big-4 {
+	display: block !important;
+	width: 100% !important;
+	text-align: center !important;
+	margin: 0 auto 18px auto !important;
+	font-size: 48px !important;
+}
+#resume-section {
+	/* tighten vertical spacing for Resume so it doesn't inherit large section padding */
+	padding-top: 3.5rem !important;
+	padding-bottom: 3.5rem !important;
+}
+#resume-section .underline {
+	width: 120px !important;
+	height: 4px !important;
+	background: rgba(255,255,255,0.08) !important;
+	margin: 0 auto 28px auto !important;
+}
+
+/* Make the education content centered within the resume section at medium+ widths
+   Use a flex container with gaps so the two education cards are always centered
+   and have a consistent maximum width that matches the visual reference. */
+@media (min-width: 768px) {
+	/* turn the specific row that contains the two education columns into a centered flex row */
+	#resume-section > .container > .row:nth-of-type(3) {
+		display: flex !important;
+		justify-content: center !important;
+		align-items: flex-start !important;
+		gap: 36px !important; /* space between the two cards (slightly reduced) */
+		flex-wrap: nowrap !important;
+	}
+
+	/* make the columns behave responsively so they can shrink on smaller viewports
+	   Use a flexible basis (45%) with a sensible min-width and a max-width so the
+	   two cards fit when the window is snapped to half-screen. */
+	#resume-section > .container > .row:nth-of-type(3) > .col-md-6 {
+		flex: 1 1 45% !important; /* allow shrinking/growing, target ~45% of row */
+		min-width: 300px !important; /* don't become too narrow */
+		max-width: 420px !important; /* card max width */
+		margin: 0 !important;
+		display: block !important;
+		box-sizing: border-box !important;
+	}
+
+	/* ensure the internal resume card uses full width of its column and left-align its text
+	   while the outer row keeps the cards centered in the page */
+	#resume-section .resume-wrap {
+		width: 100% !important;
+		box-sizing: border-box !important;
+		text-align: left !important;
+		margin: 0 !important;
+	}
+
+	/* fallback for older browsers: if nth-of-type isn't supported, also apply a more general
+	   centering rule so content doesn't break. This will center any direct .col-md-6 under
+	   #resume-section while the more specific rule above takes priority in supporting browsers. */
+	#resume-section .row { display: flex !important; justify-content: center !important; gap: 36px !important; }
+	#resume-section .row > .col-md-6 { flex: 1 1 45% !important; min-width: 300px !important; max-width: 420px !important; margin: 0 !important; box-sizing: border-box !important; }
+}
+
+/* On small screens, allow cards to stack naturally and retain full width */
+@media (max-width: 767.98px) {
+	#resume-section .row { display: block !important; }
+	#resume-section .row > .col-md-6 { width: 100% !important; max-width: none !important; margin: 0 0 16px 0 !important; }
+	#resume-section > .container > .row:nth-of-type(3) { gap: 16px !important; }
+}
+
+	/* High-specificity final override: pin the hero image to the right of #home-section
+	   Position relative to #home-section (not the slider-item) so collapsed slider heights
+	   won't push the image to the page top. Also ensure the hero has enough height for
+	   correct vertical centering. This block intentionally comes last and uses !important. */
+	@media (min-width: 992px) {
+		#home-section { position: relative !important; min-height: 62vh !important; }
+
+		/* absolute position the image relative to #home-section */
+		#home-section .home-slider > .slider-item .one-third.img {
+			position: absolute !important;
+			right: 6vw !important;
+			top: 50% !important;
+			transform: translateY(-50%) !important;
+			width: 360px !important;
+			max-width: 360px !important;
+			margin: 0 !important;
+			z-index: 40 !important;
+			display: block !important;
+		}
+
+		#home-section .home-slider > .slider-item .one-third.img .hero-photo {
+			width: 100% !important;
+			height: auto !important;
+			display: block !important;
+			border-radius: 50% !important;
+		}
+
+		/* make sure text doesn't flow under the pinned image */
+		#home-section .home-slider > .slider-item .slider-text {
+			margin-right: calc(360px + 6vw) !important;
+			box-sizing: border-box !important;
+			z-index: 50 !important;
+		}
+	}
+
+	@media (max-width: 991.98px) {
+		/* revert to stacked behavior on small screens */
+		#home-section .home-slider > .slider-item .one-third.img { position: relative !important; right: auto !important; top: auto !important; transform: none !important; margin: 0 auto 8px auto !important; }
+		#home-section .home-slider > .slider-item .one-third.img .hero-photo { max-width: 72vw !important; width: 72vw !important; height: auto !important; }
+		#home-section .home-slider > .slider-item .slider-text { margin-right: 0 !important; padding-right: 0 !important; }
+	}
+

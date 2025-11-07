@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mumbai Indians - Official Team Website</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="logo-section">
+                <img src="images/logo_mumbai_indians.png" alt="Mumbai Indians Logo" class="nav-logo">
+                <span class="team-name">Mumbai Indians</span>
+            </div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#players" class="nav-link">Players</a></li>
+                <li><a href="#schedule" class="nav-link">Schedule</a></li>
+                <li><a href="#stats" class="nav-link">Stats</a></li>
+                <li><a href="#news" class="nav-link">News</a></li>
+                <li><a href="#fan-zone" class="nav-link">Fan Zone</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle Menu">
+                <span class="hamburger"></span>
+                <span class="hamburger"></span>
+                <span class="hamburger"></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <img src="images/logo_mumbai_indians.png" alt="Mumbai Indians Logo" class="hero-logo">
+            <h1 class="hero-title">Mumbai Indians</h1>
+            <p class="hero-subtitle">Duniya Hila Denge Hum</p>
+            <p class="hero-description">5-Time IPL Champions | The Most Successful IPL Franchise</p>
+            <button class="cta-button" onclick="scrollToSection('players')">Meet Our Champions</button>
+        </div>
+    </section>
+
+    <!-- Players Section -->
+    <section class="section" id="players">
+        <div class="container">
+            <h2 class="section-title">Our Squad</h2>
+            <p class="section-subtitle">Meet the champions who make us proud</p>
+            <div class="players-grid">
+                <div class="player-card">
+                    <img src="images/Rohith_Sharma.jpg" alt="Rohit Sharma" class="player-img">
+                    <div class="player-info">
+                        <h3 class="player-name">Rohit Sharma</h3>
+                        <p class="player-role">Captain / Opening Batter</p>
+                    </div>
+                </div>
+                <div class="player-card">
+                    <img src="images/Hardik_Pandya.jpg" alt="Hardik Pandya" class="player-img">
+                    <div class="player-info">
+                        <h3 class="player-name">Hardik Pandya</h3>
+                        <p class="player-role">All-rounder</p>
+                    </div>
+                </div>
+                <div class="player-card">
+                    <img src="images/Suryakumar_Yadav.jpg" alt="Suryakumar Yadav" class="player-img">
+                    <div class="player-info">
+                        <h3 class="player-name">Suryakumar Yadav</h3>
+                        <p class="player-role">Middle-order Batter</p>
+                    </div>
+                </div>
+                <div class="player-card">
+                    <img src="images/Jasprit_Bumrah.jpg" alt="Jasprit Bumrah" class="player-img">
+                    <div class="player-info">
+                        <h3 class="player-name">Jasprit Bumrah</h3>
+                        <p class="player-role">Fast Bowler</p>
+                    </div>
+                </div>
+                <div class="player-card">
+                    <img src="images/Tilak_Varma.jpg" alt="Tilak Varma" class="player-img">
+                    <div class="player-info">
+                        <h3 class="player-name">Tilak Varma</h3>
+                        <p class="player-role">Batter</p>
+                    </div>
+                </div>
+                <div class="player-card">
+                    <img src="images/Trent_Boult.jpg" alt="Trent Boult" class="player-img">
+                    <div class="player-info">
+                        <h3 class="player-name">Trent Boult</h3>
+                        <p class="player-role">Bowler</p>
+                    </div>
+                </div>
+                <div class="player-card">
+                    <img src="images/Naman_Dhir.jpg" alt="Naman Dhir" class="player-img">
+                    <div class="player-info">
+                        <h3 class="player-name">Naman Dhir</h3>
+                        <p class="player-role">Batter</p>
+                    </div>
+                </div>
+                <div class="player-card">
+                    <img src="images/Mitchell_Santner.jpg" alt="Mitchell Santner" class="player-img">
+                    <div class="player-info">
+                        <h3 class="player-name">Mitchell Santner</h3>
+                        <p class="player-role">All-rounder</p>
+                    </div>
+                </div>
+                <div class="player-card">
+                    <img src="images/Bevon_Jacobs.jpg" alt="Bevon Jacobs" class="player-img">
+                    <div class="player-info">
+                        <h3 class="player-name">Bevon Jacobs</h3>
+                        <p class="player-role">Bowler</p>
+                    </div>
+                </div>
+                <div class="player-card">
+                    <img src="images/Deepak_Chahar.jpg" alt="Deepak Chahar" class="player-img">
+                    <div class="player-info">
+                        <h3 class="player-name">Deepak Chahar</h3>
+                        <p class="player-role">Fast Bowler</p>
+                    </div>
+                </div>
+                <div class="player-card">
+                    <img src="images/Jonny_Bairstow.jpg" alt="Jonny Bairstow" class="player-img">
+                    <div class="player-info">
+                        <h3 class="player-name">Jonny Bairstow</h3>
+                        <p class="player-role">Wicketkeeper-Batsman</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Match Schedule Section -->
+    <section class="section schedule-section" id="schedule">
+        <div class="container">
+            <h2 class="section-title">Match Schedule</h2>
+            <p class="section-subtitle">Upcoming fixtures for IPL 2026 Season</p>
+            <div class="schedule-table-container">
+                <table class="schedule-table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Opponent</th>
+                            <th>Venue</th>
+                            <th>Time</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td data-label="Date">March 22, 2026</td>
+                            <td data-label="Opponent">vs Chennai Super Kings</td>
+                            <td data-label="Venue">Wankhede Stadium, Mumbai</td>
+                            <td data-label="Time">7:30 PM IST</td>
+                        </tr>
+                        <tr>
+                            <td data-label="Date">March 26, 2026</td>
+                            <td data-label="Opponent">vs Royal Challengers Bangalore</td>
+                            <td data-label="Venue">M. Chinnaswamy Stadium, Bangalore</td>
+                            <td data-label="Time">3:30 PM IST</td>
+                        </tr>
+                        <tr>
+                            <td data-label="Date">March 30, 2026</td>
+                            <td data-label="Opponent">vs Kolkata Knight Riders</td>
+                            <td data-label="Venue">Eden Gardens, Kolkata</td>
+                            <td data-label="Time">7:30 PM IST</td>
+                        </tr>
+                        <tr>
+                            <td data-label="Date">April 3, 2026</td>
+                            <td data-label="Opponent">vs Delhi Capitals</td>
+                            <td data-label="Venue">Wankhede Stadium, Mumbai</td>
+                            <td data-label="Time">7:30 PM IST</td>
+                        </tr>
+                        <tr>
+                            <td data-label="Date">April 7, 2026</td>
+                            <td data-label="Opponent">vs Punjab Kings</td>
+                            <td data-label="Venue">Punjab Cricket Association Stadium, Mohali</td>
+                            <td data-label="Time">7:30 PM IST</td>
+                        </tr>
+                        <tr>
+                            <td data-label="Date">April 12, 2026</td>
+                            <td data-label="Opponent">vs Rajasthan Royals</td>
+                            <td data-label="Venue">Wankhede Stadium, Mumbai</td>
+                            <td data-label="Time">7:30 PM IST</td>
+                        </tr>
+                        <tr>
+                            <td data-label="Date">April 16, 2026</td>
+                            <td data-label="Opponent">vs Sunrisers Hyderabad</td>
+                            <td data-label="Venue">Rajiv Gandhi International Stadium, Hyderabad</td>
+                            <td data-label="Time">7:30 PM IST</td>
+                        </tr>
+                        <tr>
+                            <td data-label="Date">April 20, 2026</td>
+                            <td data-label="Opponent">vs Gujarat Titans</td>
+                            <td data-label="Venue">Wankhede Stadium, Mumbai</td>
+                            <td data-label="Time">7:30 PM IST</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Stats Section -->
+    <section class="section stats-section" id="stats">
+        <div class="container">
+            <h2 class="section-title">Team Statistics</h2>
+            <p class="section-subtitle">Our Journey of Excellence</p>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">🏏</div>
+                    <div class="stat-number" data-target="256">0</div>
+                    <div class="stat-label">Total Matches</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🏆</div>
+                    <div class="stat-number" data-target="146">0</div>
+                    <div class="stat-label">Matches Won</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">❌</div>
+                    <div class="stat-number" data-target="110">0</div>
+                    <div class="stat-label">Matches Lost</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">⭐</div>
+                    <div class="stat-number" data-target="5">0</div>
+                    <div class="stat-label">IPL Titles</div>
+                </div>
+            </div>
+            <div class="top-performer">
+                <h3 class="performer-title">Top Performer</h3>
+                <div class="performer-card">
+                    <img src="images/Rohith_Sharma.jpg" alt="Rohit Sharma" class="performer-img">
+                    <div class="performer-info">
+                        <h4>Rohit Sharma</h4>
+                        <p class="performer-stats">6,211 Runs | 40 Half-Centuries | 2 Centuries</p>
+                        <p class="performer-achievement">Most runs for Mumbai Indians in IPL history</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- News Section -->
+    <section class="section news-section" id="news">
+        <div class="container">
+            <h2 class="section-title">Latest News</h2>
+            <p class="section-subtitle">Stay updated with team announcements</p>
+            <div class="news-grid">
+                <div class="news-card">
+                    <div class="news-image">
+                        <img src="images/banner_mi.jpg" alt="News" class="news-img">
+                        <span class="news-badge">Breaking</span>
+                    </div>
+                    <div class="news-content">
+                        <span class="news-date">November 5, 2025</span>
+                        <h3 class="news-title">Mumbai Indians Announce Squad for IPL 2026</h3>
+                        <p class="news-excerpt">Mumbai Indians have retained their core team including captain Rohit Sharma and star players. The franchise has made strategic additions to strengthen the squad for the upcoming season.</p>
+                        <a href="#" class="read-more">Read More →</a>
+                    </div>
+                </div>
+                <div class="news-card">
+                    <div class="news-image">
+                        <img src="images/Jasprit_Bumrah.jpg" alt="News" class="news-img">
+                        <span class="news-badge">Update</span>
+                    </div>
+                    <div class="news-content">
+                        <span class="news-date">November 3, 2025</span>
+                        <h3 class="news-title">Jasprit Bumrah Declared Fit for New Season</h3>
+                        <p class="news-excerpt">Star fast bowler Jasprit Bumrah has been cleared by the medical team and is ready to lead Mumbai Indians' bowling attack in the upcoming IPL season.</p>
+                        <a href="#" class="read-more">Read More →</a>
+                    </div>
+                </div>
+                <div class="news-card">
+                    <div class="news-image">
+                        <img src="images/Hardik_Pandya.jpg" alt="News" class="news-img">
+                        <span class="news-badge">Featured</span>
+                    </div>
+                    <div class="news-content">
+                        <span class="news-date">November 1, 2025</span>
+                        <h3 class="news-title">Hardik Pandya Returns to Full Fitness</h3>
+                        <p class="news-excerpt">All-rounder Hardik Pandya has completed his rehabilitation and is set to play a crucial role in Mumbai Indians' campaign for the sixth IPL title.</p>
+                        <a href="#" class="read-more">Read More →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Fan Zone Section -->
+    <section class="section fan-zone-section" id="fan-zone">
+        <div class="container">
+            <h2 class="section-title">Fan Zone</h2>
+            <p class="section-subtitle">Join the Mumbai Indians family</p>
+            
+            <div class="fan-zone-content">
+                <!-- Poll Section -->
+                <div class="poll-section">
+                    <h3 class="poll-title">Vote for Your Favorite Player</h3>
+                    <div class="poll-options" id="pollOptions">
+                        <div class="poll-option" data-player="Rohit Sharma">
+                            <input type="radio" name="player" id="player1" value="Rohit Sharma">
+                            <label for="player1">
+                                <span class="player-poll-name">Rohit Sharma</span>
+                                <span class="poll-percentage" id="poll1">0%</span>
+                            </label>
+                            <div class="poll-bar">
+                                <div class="poll-fill" id="fill1" style="width: 0%"></div>
+                            </div>
+                        </div>
+                        <div class="poll-option" data-player="Jasprit Bumrah">
+                            <input type="radio" name="player" id="player2" value="Jasprit Bumrah">
+                            <label for="player2">
+                                <span class="player-poll-name">Jasprit Bumrah</span>
+                                <span class="poll-percentage" id="poll2">0%</span>
+                            </label>
+                            <div class="poll-bar">
+                                <div class="poll-fill" id="fill2" style="width: 0%"></div>
+                            </div>
+                        </div>
+                        <div class="poll-option" data-player="Hardik Pandya">
+                            <input type="radio" name="player" id="player3" value="Hardik Pandya">
+                            <label for="player3">
+                                <span class="player-poll-name">Hardik Pandya</span>
+                                <span class="poll-percentage" id="poll3">0%</span>
+                            </label>
+                            <div class="poll-bar">
+                                <div class="poll-fill" id="fill3" style="width: 0%"></div>
+                            </div>
+                        </div>
+                        <div class="poll-option" data-player="Suryakumar Yadav">
+                            <input type="radio" name="player" id="player4" value="Suryakumar Yadav">
+                            <label for="player4">
+                                <span class="player-poll-name">Suryakumar Yadav</span>
+                                <span class="poll-percentage" id="poll4">0%</span>
+                            </label>
+                            <div class="poll-bar">
+                                <div class="poll-fill" id="fill4" style="width: 0%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="vote-button" id="voteButton">Submit Vote</button>
+                    <p class="vote-message" id="voteMessage"></p>
+                </div>
+
+                <!-- Social Media Section -->
+                <div class="social-section">
+                    <h3 class="social-title">Connect With Us</h3>
+                    <p class="social-description">Follow Mumbai Indians on social media for exclusive content and updates</p>
+                    <div class="social-links">
+                        <a href="https://twitter.com/mipaltan" target="_blank" class="social-link twitter">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+                            </svg>
+                            Twitter
+                        </a>
+                        <a href="https://www.facebook.com/mumbaiindians" target="_blank" class="social-link facebook">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                            </svg>
+                            Facebook
+                        </a>
+                        <a href="https://www.instagram.com/mumbaiindians" target="_blank" class="social-link instagram">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.899 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.899-.421-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06l.045.03zm0 3.678c-3.405 0-6.162 2.76-6.162 6.162 0 3.405 2.76 6.162 6.162 6.162 3.405 0 6.162-2.76 6.162-6.162 0-3.405-2.76-6.162-6.162-6.162zM12 16c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm7.846-10.405c0 .795-.646 1.44-1.44 1.44-.795 0-1.44-.646-1.44-1.44 0-.794.646-1.439 1.44-1.439.793-.001 1.44.645 1.44 1.439z"/>
+                            </svg>
+                            Instagram
+                        </a>
+                        <a href="https://www.youtube.com/mumbaiindians" target="_blank" class="social-link youtube">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                            </svg>
+                            YouTube
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section contact-section" id="contact">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            <p class="section-subtitle">Have questions? We'd love to hear from you</p>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="info-item">
+                        <div class="info-icon">📍</div>
+                        <div class="info-text">
+                            <h4>Address</h4>
+                            <p>Wankhede Stadium, D Road, Churchgate, Mumbai, Maharashtra 400020</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon">📧</div>
+                        <div class="info-text">
+                            <h4>Email</h4>
+                            <p>info@mumbaiindians.com</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon">📞</div>
+                        <div class="info-text">
+                            <h4>Phone</h4>
+                            <p>+91 22 1234 5678</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <input type="text" id="name" placeholder="Your Name" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" id="email" placeholder="Your Email" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea id="message" rows="5" placeholder="Your Message" required></textarea>
+                        </div>
+                        <button type="submit" class="submit-button">Send Message</button>
+                    </form>
+                    <p class="form-message" id="formMessage"></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="images/logo_mumbai_indians.png" alt="Mumbai Indians" class="footer-logo-img">
+                    <p class="footer-slogan">Duniya Hila Denge Hum</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#players">Players</a></li>
+                        <li><a href="#schedule">Schedule</a></li>
+                        <li><a href="#stats">Stats</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>More</h4>
+                    <ul>
+                        <li><a href="#news">News</a></li>
+                        <li><a href="#fan-zone">Fan Zone</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+<div class="footer-bottom">
+    <p>&copy; 2025 Mumbai Indians Fan Website | Developed by <strong>Abhishek Naik</strong>.</p>
+</div>
+</div>
+</footer>
+
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-top" id="scrollTop" aria-label="Scroll to top">↑</button>
+
+    <script src="script.js"></script>
+</body>
+</html>
